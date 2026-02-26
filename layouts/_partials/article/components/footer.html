@@ -1,0 +1,30 @@
+<footer class="article-footer">
+    {{ partial "article/components/tags" . }}
+
+    {{ if .Params.hideTitle }}
+        {{ if not .Date.IsZero }}
+        <section class="article-time">
+            {{ partial "helper/icon" "date" }}
+            <span>
+                {{ .Date | time.Format .Site.Params.dateFormat.published }}
+            </span>
+        </section>
+        {{ end }}
+    {{ end }}
+
+    {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+    <section class="article-copyright">
+        {{ partial "helper/icon" "copyright" }}
+        <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+    </section>
+    {{ end }}
+
+    {{- if ne .Lastmod .Date -}}
+    <section class="article-lastmod">
+        {{ partial "helper/icon" "clock" }}
+        <span>
+            {{ T "article.lastUpdatedOn" }} {{ .Lastmod | time.Format .Site.Params.dateFormat.lastUpdated }}
+        </span>
+    </section>
+    {{- end -}}
+</footer>

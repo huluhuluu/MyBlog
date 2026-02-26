@@ -14,3 +14,6 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# agents 相关文件
+AGENTS.md
