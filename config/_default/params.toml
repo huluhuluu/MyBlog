@@ -1,0 +1,173 @@
+mainSections       = ["post"]
+featuredImageField = "image"
+rssFullContent     = true
+favicon            = "img/avatar.png"
+
+[footer]
+    since      = 2026
+    customText = ""
+
+[dateFormat]
+    published   = "2006-01-02"
+    lastUpdated = "2006-01-02"
+
+[sidebar]
+    compact   = false
+    emoji     = "📑"
+    avatar    = "img/avatar.png"
+
+[article]
+    headingAnchor = false
+    math          = false
+    toc           = true
+    readingTime   = true
+
+    [article.list]
+        showTags = false
+
+    [article.license]
+        enabled = true
+        default = "Licensed under CC BY-NC-SA 4.0"
+
+    [article.mermaid]
+        look                  = "classic"
+        lightTheme            = "default"
+        darkTheme             = "dark"
+        securityLevel         = "strict"
+        htmlLabels            = true
+        transparentBackground = false
+
+    [article.alertIcon]
+        note      = "📑"
+        tip       = "💡"
+        important = "❗"
+        warning   = "⚠️"
+        caution   = "🔥"
+
+[widgets]
+    homepage = [
+        { type = "search" },
+        { type = "archives", params = { limit = 5 } },
+        { type = "categories", params = { limit = 10 } },
+        { type = "tag-cloud", params = { limit = 10 } },
+    ]
+    page = [{ type = "toc" }]
+
+[opengraph.twitter]
+    site = ""
+    card = "summary_large_image"
+
+[colorScheme]
+    toggle  = true
+    default = "auto"
+
+[imageProcessing.cover]
+    enabled = true
+
+[imageProcessing.content]
+    enabled = true
+
+[cookies]
+    enabled      = false
+    showSettings = true
+
+    [cookies.categories]
+        analytics  = true
+        functional = true
+
+[comments]
+    enabled  = true
+    provider = "giscus"
+
+    [comments.disqusjs]
+        shortname  = ""
+        apiUrl     = ""
+        apiKey     = ""
+        admin      = ""
+        adminLabel = ""
+
+    [comments.utterances]
+        repo      = ""
+        issueTerm = "pathname"
+        label     = ""
+
+    [comments.beaudar]
+        repo      = ""
+        issueTerm = "pathname"
+        label     = ""
+        theme     = ""
+
+    [comments.remark42]
+        host                    = ""
+        site                    = ""
+        locale                  = "en"
+        max_shown_comments      = 15
+        show_email_subscription = true
+
+    [comments.vssue]
+        platform        = ""
+        owner           = ""
+        repo            = ""
+        clientId        = ""
+        clientSecret    = ""
+        autoCreateIssue = false
+
+    [comments.waline]
+        serverURL    = ""
+        lang         = ""
+        pageview     = ""
+        emoji        = ["https://unpkg.com/@waline/emojis@1.0.1/weibo"]
+        requiredMeta = ["name", "email", "url"]
+
+        [comments.waline.locale]
+            admin       = "Admin"
+            placeholder = ""
+
+    [comments.twikoo]
+        envId  = ""
+        region = ""
+        path   = ""
+        lang   = ""
+
+    [comments.cactus]
+        defaultHomeserverUrl = "https://matrix.cactus.chat:8448"
+        serverName           = "cactus.chat"
+        siteName             = ""
+
+    [comments.giscus]
+        repo             = "huluhuluu/MyBlog"
+        repoID           = "R_kgDORYYQ8A"
+        category         = "Announcements"
+        categoryID       = "DIC_kwDORYYQ8M4C3O_9"
+        mapping          = "pathname"
+        lightTheme       = "light"
+        darkTheme        = "dark_dimmed"
+        reactionsEnabled = 1
+        emitMetadata     = 0
+        inputPosition    = "bottom"
+        lang             = "zh-CN"
+        strict           = 0
+        loading          = "lazy"
+
+    [comments.gitalk]
+        owner        = ""
+        admin        = ""
+        repo         = ""
+        clientID     = ""
+        clientSecret = ""
+        proxy        = ""
+
+    [comments.cusdis]
+        host = "https://cusdis.com"
+        id   = ""
+
+    [comments.comentario]
+        url                   = ""
+        autoInit              = false
+        autoNonInteractiveSso = false
+        cssOverride           = ""
+        lang                  = ""
+        liveUpdate            = false
+        maxLevel              = 0
+        noFonts               = false
+        theme                 = ""

@@ -1,0 +1,26 @@
+[zh]
+    languageName = "简体中文"
+    title        = "huluhuluu"
+    weight       = 1
+
+    [[zh.menu.main]]
+        identifier = "home"
+        name       = "首页"
+        url        = "/"
+        weight     = -100
+        [zh.menu.main.params]
+            icon = "home"
+
+    [[zh.menu.social]]
+        identifier = "github"
+        name       = "GitHub"
+        url        = "https://github.com/huluhuluu"
+        [zh.menu.social.params]
+            icon = "brand-github"
+
+    [[zh.menu.social]]
+        identifier = "email"
+        name       = "Email"
+        url        = "mailto:huluhuluu@qq.com"
+        [zh.menu.social.params]
+            icon = "messages"

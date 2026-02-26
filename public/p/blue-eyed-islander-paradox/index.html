@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="分享一个有趣的逻辑谜题——蓝眼睛岛民悖论">
+<title>蓝眼睛岛民悖论：一个让人细思极恐的逻辑推理</title>
+
+
+<link rel="canonical" href="https://huluhuluu.github.io/p/blue-eyed-islander-paradox/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3b6cc969b5f49f45dfd672fb05b8c22156a36770f48c83a4933e72192d495999.css"><meta property='og:title' content="蓝眼睛岛民悖论：一个让人细思极恐的逻辑推理">
+<meta property='og:description' content="分享一个有趣的逻辑谜题——蓝眼睛岛民悖论">
+<meta property='og:url' content='https://huluhuluu.github.io/p/blue-eyed-islander-paradox/'>
+<meta property='og:site_name' content='huluhuluu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='逻辑' /><meta property='article:tag' content='悖论' /><meta property='article:tag' content='分享' /><meta property='article:published_time' content='2026-02-26T00:30:00&#43;08:00'/><meta property='article:modified_time' content='2026-02-26T00:30:00&#43;08:00'/>
+<meta name="twitter:title" content="蓝眼睛岛民悖论：一个让人细思极恐的逻辑推理">
+<meta name="twitter:description" content="分享一个有趣的逻辑谜题——蓝眼睛岛民悖论">
+    <link rel="shortcut icon" href="/img/avatar.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="150"
+                        height="150"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">📑</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">huluhuluu</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='mailto:huluhuluu@qq.com'
+                        
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/huluhuluu'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#问题背景">问题背景</a></li>
+    <li><a href="#反直觉的答案">反直觉的答案</a></li>
+    <li><a href="#递归推理">递归推理</a></li>
+    <li><a href="#问题来了外乡人到底说了什么新信息">问题来了：外乡人到底说了什么新信息？</a></li>
+    <li><a href="#还是不太对">还是不太对？</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/%E5%88%86%E4%BA%AB/" style="background-color: hsl(289, 60%, 84%); color: hsl(289, 60%, 15%);">
+                分享
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/blue-eyed-islander-paradox/">蓝眼睛岛民悖论：一个让人细思极恐的逻辑推理</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            分享一个有趣的逻辑谜题——蓝眼睛岛民悖论
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-02-26T00:30:00&#43;08:00'>2026-02-26</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span>目录</span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#问题背景">问题背景</a></li>
+    <li><a href="#反直觉的答案">反直觉的答案</a></li>
+    <li><a href="#递归推理">递归推理</a></li>
+    <li><a href="#问题来了外乡人到底说了什么新信息">问题来了：外乡人到底说了什么新信息？</a></li>
+    <li><a href="#还是不太对">还是不太对？</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <p>最近看到一个很有意思的逻辑谜题，叫「蓝眼睛岛民悖论」，出自 <a class="link" href="https://www.bilibili.com/video/BV1FdWEzwEDw/"  target="_blank" rel="noopener"
+    >这个视频</a>。乍一看觉得答案很反直觉，仔细想想又觉得有道理，再深入一想又觉得哪里不对……就这么反复横跳，挺有意思的，记录一下。</p>
+<h2 id="问题背景">问题背景
+</h2><p>故事是这样的：</p>
+<p>有一个与世隔绝的岛屿，岛上住着 100 个人。其中有 5 个人是蓝眼睛，95 个人是棕眼睛。岛上有一条神秘的规则：<strong>如果你知道了自己眼睛的颜色，你必须在当天午夜自杀</strong>。</p>
+<p>岛民们都知道这条规则，也都遵守它。他们可以看到别人眼睛的颜色，但看不到自己的，也没有镜子之类的东西。他们之间的交流非常有限——彼此之间<strong>从不谈论眼睛颜色相关的话题</strong>。所以每个人都不知道自己眼睛是什么颜色。</p>
+<p>有一天，一个外乡人来到岛上，在公开场合说了一句话：</p>
+
+    <blockquote>
+        <p><strong>「你们当中至少有一个人是蓝眼睛。」</strong></p>
+
+    </blockquote>
+<p>然后外乡人就离开了。</p>
+<p>问题来了：<strong>这句话会带来什么后果？</strong></p>
+<h2 id="反直觉的答案">反直觉的答案
+</h2><p>直觉上，外乡人说的这句话好像没什么信息量——毕竟岛上有 5 个蓝眼睛的人，每个人都能看到至少 4 个蓝眼睛的人，所以「至少有一个人是蓝眼睛」这件事，岛上每个人早就知道了。</p>
+<p>但答案是：<strong>第 5 天午夜，5 个蓝眼睛的人会一起自杀。</strong></p>
+<p>等等，这怎么可能？外乡人说的明明是大家都知道的事情啊？</p>
+<h2 id="递归推理">递归推理
+</h2><p>让我们从简单的情况开始分析。</p>
+<p><strong>如果岛上只有 1 个蓝眼睛的人</strong>：</p>
+<p>这个人看到其他 99 个人都是棕眼睛。当外乡人说「至少有一个人是蓝眼睛」时，他立刻就知道那个蓝眼睛的人就是自己。所以第一天午夜，他会自杀。</p>
+<p><strong>如果岛上有 2 个蓝眼睛的人（A 和 B）</strong>：</p>
+<ul>
+<li>A 看到 B 是蓝眼睛，心想：如果我不是蓝眼睛，那 B 看到的应该全是棕眼睛的人，按照上面 1 个人的情况，B 第一天就会自杀。</li>
+<li>第一天过去了，B 没有自杀。</li>
+<li>A 就明白了：B 肯定看到了另一个蓝眼睛的人，那个人只能是我自己。</li>
+<li>所以第二天，A 和 B 都会自杀。</li>
+</ul>
+<p><strong>如果岛上有 3 个蓝眼睛的人（A、B、C）</strong>：</p>
+<ul>
+<li>A 看到 B 和 C 是蓝眼睛，心想：如果我不是蓝眼睛，那 B 和 C 应该在第二天自杀（按照 2 个人的情况）。</li>
+<li>第二天过去了，B 和 C 都没有自杀。</li>
+<li>A 明白了：B 和 C 肯定看到了第三个蓝眼睛的人，那就是我。</li>
+<li>所以第三天，三个人一起自杀。</li>
+</ul>
+<p>以此类推，<strong>5 个蓝眼睛的情况下，第五天他们会一起自杀</strong>。</p>
+<h2 id="问题来了外乡人到底说了什么新信息">问题来了：外乡人到底说了什么新信息？
+</h2><p>这就是悖论的核心。</p>
+<p>每个人都能看到 4 个蓝眼睛的人，所以「至少有一个人是蓝眼睛」这个信息，大家不是早就知道了吗？</p>
+<p>关键在于「<strong>共同知识</strong>」和「<strong>我知道你知道</strong>」的区别。</p>
+<p>在外乡人说话之前：</p>
+<ul>
+<li>A 知道「至少有一个人是蓝眼睛」——因为他看到了 B、C、D、E</li>
+<li>A 也知道 B 知道「至少有一个人是蓝眼睛」——因为 A 知道 B 能看到 C、D、E</li>
+<li>但 A <strong>不知道</strong> B 是否知道 C 知道「至少有一个人是蓝眼睛」——因为 A 不知道自己是不是蓝眼睛，如果 A 不是蓝眼睛，那 B 就只能看到 C、D、E，而 B 也不知道 C 能看到几个蓝眼睛的人……</li>
+</ul>
+<p>这条「我知道你知道他知道……」的链条，在外乡人说话之前是断裂的。</p>
+<p>外乡人的话，把「至少有一个人是蓝眼睛」变成了<strong>共同知识</strong>——每个人都知道，每个人都知道每个人都知道，每个人都知道每个人都知道每个人都知道……无限嵌套下去。</p>
+<p>正是这个「共同知识」的建立，让递归推理得以进行。</p>
+<h2 id="还是不太对">还是不太对？
+</h2><p>我一开始觉得这个解释挺有道理的。但后来又想：</p>
+<p><strong>假设岛上有 100 个蓝眼睛的人</strong>。</p>
+<p>按照同样的推理，第 100 天所有人都会自杀。但每个蓝眼睛的人都能看到 99 个蓝眼睛的人，外乡人说的话，对他们来说有什么新信息呢？</p>
+<p>这里确实存在一些争议。有人认为悖论的关键在于「共同知识」的建立，有人认为外乡人的话确实没有传递新信息，悖论可能源于我们假设了过于理想化的推理能力。</p>
+<h2 id="小结">小结
+</h2><p>这个悖论吸引我的地方在于，它揭示了「<strong>信息</strong>」这个概念的微妙之处。有时候，表面上看起来「大家都知道」的事情，一旦被公开说出来，就可能产生意想不到的后果。</p>
+<p>当然，现实中不太可能出现这种极端情况。但类似的逻辑在很多场景下都有应用，比如博弈论、分布式系统中的共识问题等。</p>
+<p>感兴趣的话可以去看看原视频，讲得比我清楚多了。</p>
+<hr>
+<p><strong>参考资料</strong>：<a class="link" href="https://www.bilibili.com/video/BV1FdWEzwEDw/"  target="_blank" rel="noopener"
+    >蓝眼睛岛民悖论 - Bilibili</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E9%80%BB%E8%BE%91/">逻辑</a>
+        
+            <a href="/tags/%E6%82%96%E8%AE%BA/">悖论</a>
+        
+            <a href="/tags/%E5%88%86%E4%BA%AB/">分享</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mad-passenger-problem/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">疯子乘客问题：当博弈论遇上生死抉择</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <script
+    src="https://giscus.app/client.js"
+    data-repo="huluhuluu/MyBlog"
+    data-repo-id="R_kgDORYYQ8A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORYYQ8M4C3O_9"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 huluhuluu
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js" defer></script>
+
+
+    </body>
+</html>
