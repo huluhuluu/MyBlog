@@ -1,5 +1,14 @@
 /* 自定义样式 */
 
+/* 侧边栏 - 减少 site-meta 和 menu-social 的间距 */
+.sidebar header {
+    gap: 10px !important;
+}
+
+.menu-social {
+    margin-top: -5px;
+}
+
 /* 分页组件 - 紧凑居中 */
 .pagination {
     display: flex !important;

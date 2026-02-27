@@ -1,6 +1,6 @@
 # huluhuluu 的个人博客
 
-基于 [Hugo](https://gohugo.io/) + [hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack) + [GitHub Pages](https://pages.github.com/) / [Vercel](https://vercel.com/) 构建的个人博客。
+基于 [Hugo](https://gohugo.io/) + [hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack) +  [Vercel](https://vercel.com/) 构建的个人博客。
 
 ## 站点信息
 
