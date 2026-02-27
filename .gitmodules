@@ -1,3 +1,9 @@
 [submodule "themes/hugo-theme-stack"]
 	path = themes/hugo-theme-stack
 	url = https://github.com/CaiJimmy/hugo-theme-stack.git
+[submodule "content/post/mnn-tutorial"]
+	path = content/post/mnn-tutorial
+	url = https://github.com/huluhuluu/MNN-TUTORIAL.git
+[submodule "content/post/leetcode-logs"]
+	path = content/post/leetcode-logs
+	url = https://github.com/huluhuluu/Leetcode-Logs.git

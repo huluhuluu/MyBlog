@@ -1,5 +1,6 @@
 ---
 title: "搜索"
+date: 2026-02-26
 slug: "search"
 layout: "search"
 outputs:

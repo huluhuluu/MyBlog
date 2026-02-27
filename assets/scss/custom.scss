@@ -1,1 +1,58 @@
 /* 自定义样式 */
+
+/* 分页组件 - 紧凑居中 */
+.pagination {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: nowrap;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.pagination .page-link {
+    flex: none !important;
+    min-width: 48px;
+    padding: 16px !important;
+}
+
+/* TOC 折叠功能 */
+.toc-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.toc-collapse-all {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid var(--body-text-color);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: var(--body-text-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, background 0.2s;
+}
+
+.toc-collapse-all:hover {
+    opacity: 1;
+    background: var(--card-background-selected);
+}
+
+.toc-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.toc-toggle-btn:hover {
+    opacity: 1;
+}

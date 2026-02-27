@@ -20,3 +20,13 @@ theme                  = "hugo-theme-stack"
     changefreq = "weekly"
     filename   = "sitemap.xml"
     priority   = 0.5
+
+# Mount MNN-TUTORIAL blog content as separate posts
+[module]
+    [[module.mounts]]
+        source = "content"
+        target = "content"
+        excludeFiles = ["post/mnn-tutorial/blog/**"]
+    [[module.mounts]]
+        source = "content/post/mnn-tutorial/blog"
+        target = "content/post"
