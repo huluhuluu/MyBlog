@@ -169,7 +169,7 @@ MyBlog/
 - **themes/**: 主题文件，建议用 git submodule 管理
 
 ### 2.2 修改并且推送到远程仓库
-- 修改博客内容，例如在`content/post/`目录下新建一个markdown文件`hello-world.md`，并且添加一些内容，这里我使用[iflow agent](../useful-tools/index.zh.md)帮我配置主题以及个人信息和博客；
+- 修改博客内容，例如在`content/post/`目录下新建一个markdown文件`hello-world.md`，并且添加一些内容，这里我使用[iflow agent](../useful-tools/index.zh.md/#14-iflow)帮我配置主题以及个人信息和博客；
 - 把本地内容推送到远程仓库:
    ```powershell
    blog\MyBlog> git add . # 添加修改到暂存区
@@ -250,3 +250,85 @@ MyBlog/
 
 - 第三步，在Hugo博客的配置文件中添加Giscus的相关设置。例如这里添加在`params.toml`中：
    ![添加配置](images/giscus-config.png)
+
+## 3.3 子仓库自动更新
+如果博客中使用了`git submodule`管理内容，那么每次更新子模块后需要在主仓库中提交子模块的更新，否则vercel部署时会拉取不到最新版本。例如这里我在`content/post/mnn-tutorial`子模块中更新了内容，提交并且推送到远程仓库后，还需要在主仓库中提交子模块的更新：
+
+```powershell
+blog\MyBlog> git add content/post/mnn-tutorial # 添加子模块更新到暂存区
+blog\MyBlog> git commit -m "update mnn tutorial" # 保存暂存区修改
+blog\MyBlog> git push origin master # 推送至远程仓库
+```
+
+`github` 提供了`GitHub Actions`功能，可以在每次子模块更新后自动提交主仓库的更新，避免忘记提交导致vercel部署失败。可以[参考](https://blog.futrime.com/zh-cn/p/github%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%AD%90%E6%A8%A1%E5%9D%97/)。
+
+- 先在`github`设置中打开开发者设置: `settings -> Developer settings`
+   ![开发者设置](images/developer-settings.png)
+- 新建一个`Personal access tokens`，这里选择`classic`就够了, 需要更细粒度的权限可以选择`fine-grained`，点击`Generate new token`继续：
+   ![生成token](images/generate-token.png)
+- 设置过期时间，选择`repo`权限，滑动到最下方生成Token后复制token值备用,**注意这个Token只可见一次，需要妥善保存**
+   ![token权限](images/token-permissions.png)
+- 在**主仓库和子仓库**配置`Actions secrets`,`仓库设置 -> Secrets and variables -> Actions -> New repository secret`，
+   ![配置secret](images/config-secret.png)
+- 粘贴之前生成的Token值，点击添加保存：
+   ![添加secret](images/add-secret.png)
+- `GitHub Actions` 通过编写工作流文件来定义自动化流程，需要在主仓库的 `.github/workflows` 目录下新建文件，例如命名为`update-submodule.yml`，并且添加内容(下面内容来自[iflow](../useful-tools/index.zh.md/#14-iflow)生成)：
+   ```yaml
+   name: Update Submodules
+
+   on:
+   # 接收来自子仓库的 repository_dispatch 事件
+   repository_dispatch:
+      types: [update-submodules] # 事件类型，需与子仓库发送的事件名一致
+   workflow_dispatch:
+
+   jobs:
+   update:
+      runs-on: ubuntu-latest # 运行环境
+      steps:
+         - uses: actions/checkout@v4
+         with:
+            submodules: true
+            fetch-depth: 0
+            token: ${{ secrets.PAT }}
+
+          # 更新子模块到远程最新版本
+         - name: Update submodules
+         run: git submodule update --remote --merge
+
+         # 提交更改并推送
+         - name: Commit and push
+         run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .
+            git diff --quiet && git diff --staged --quiet || git commit -m "chore: update submodules"
+            git push https://x-access-token:${{ secrets.PAT }}@github.com/huluhuluu/MyBlog.git HEAD:master
+   ```
+
+- 同时需要在子仓库的 `.github/workflows` 目录下添加提醒的工作流文件，例如命名为`notify-parent.yml`，并且添加内容：
+   ```yaml
+   name: Notify Parent Repo
+
+   # 触发条件：推送到 main 或 master 分支时
+   on:
+   push:
+      branches: [main, master]
+   workflow_dispatch:  # 手动触发按键
+   jobs:
+   notify:
+      runs-on: ubuntu-latest
+      steps:
+         # 通知父仓库更新子模块
+         - name: Trigger parent update
+         uses: peter-evans/repository-dispatch@v3
+         with:
+            token: ${{ secrets.PAT }}
+            repository: huluhuluu/MyBlog  # 父仓库地址
+            event-type: update-submodules # 事件类型需与主仓库监听的事件名一致
+   ```
+
+- 测试，在子仓库提交一个更新并推送。在子仓库的`Actions`界面可以看到触发了`Notify Parent Repo`的工作流，并且旁边`Run workflow`按钮可以手动触发该通知工作流
+   ![子仓库工作流](images/submodule-workflow.png)
+- 查看主仓库的`GitHub Actions`是否触发了更新子模块的工作流。
+   ![主仓库工作流](images/main-repo-workflow.png)

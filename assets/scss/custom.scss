@@ -5,6 +5,20 @@
     gap: 10px !important;
 }
 
+/* TOC 目录去掉圆点 */
+.toc-nav ul,
+.toc-nav ol {
+    list-style: none !important;
+    padding-left: 1em !important;
+    margin: 0 !important;
+}
+.toc-nav li {
+    list-style: none !important;
+}
+.toc-nav li::before {
+    content: none !important;
+}
+
 .menu-social {
     margin-top: -5px;
 }
