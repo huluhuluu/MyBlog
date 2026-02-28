@@ -1,0 +1,34 @@
+name: Update Submodules
+
+# 触发条件
+on:
+  # 接收来自子仓库的通知事件
+  repository_dispatch:
+    types: [update-submodules]
+  # 手动触发
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码，包含子模块
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.PAT }}
+
+      # 更新子模块到最新版本
+      - name: Update submodules
+        run: |
+          git submodule update --remote --merge
+
+      # 提交并推送更改
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          # 如果有更改则提交
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update submodules"
+          git push
