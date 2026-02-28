@@ -9,7 +9,7 @@
 .toc-nav ul,
 .toc-nav ol {
     list-style: none !important;
-    padding-left: 1em !important;
+    padding-left: 0 !important;
     margin: 0 !important;
 }
 .toc-nav li {
@@ -38,44 +38,204 @@
     padding: 16px !important;
 }
 
-/* TOC 折叠功能 */
-.toc-header {
+/* TOC 目录组件样式 - 圆角卡片 */
+.toc-widget {
+    background: var(--widget-background, var(--card-background));
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding: 12px 14px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.toc-widget .toc-header {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 8px;
 }
 
 .toc-collapse-all {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    background: transparent;
-    border: 1px solid var(--body-text-color);
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 12px;
-    color: var(--body-text-color);
+    gap: 5px;
+    background: rgba(37, 99, 235, 0.08);
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 15px;
+    color: #2563eb;
     cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s, background 0.2s;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .toc-collapse-all:hover {
-    opacity: 1;
-    background: var(--card-background-selected);
+    background: rgba(37, 99, 235, 0.15);
+    color: #1d4ed8;
 }
 
+.toc-collapse-all svg {
+    flex-shrink: 0;
+}
+
+/* 目录导航容器 */
+.toc-nav {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+/* 滚动条样式 */
+.toc-nav::-webkit-scrollbar {
+    width: 5px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+/* 目录链接样式 */
+.toc-nav a {
+    color: #374151;
+    text-decoration: none;
+    font-size: 17px;
+    line-height: 1.6;
+    display: inline;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: all 0.15s;
+    word-break: break-word;
+}
+
+.toc-nav a:hover {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* 目录项 - 增加间隙 */
+.toc-nav li {
+    margin: 4px 0 !important;
+    padding: 0 !important;
+}
+
+/* 一级目录 */
+.toc-nav > ul > li > a,
+.toc-nav > ol > li > a {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 17px;
+}
+
+/* 二级及以下目录 */
+.toc-nav ul ul,
+.toc-nav ol ol {
+    padding-left: 18px !important;
+    margin-left: 6px;
+    margin-top: 4px;
+    border-left: 2px solid #d1d5db;
+}
+
+.toc-nav ul ul a,
+.toc-nav ol ol a {
+    font-size: 16px;
+    color: #4b5563;
+}
+
+/* 三级目录 */
+.toc-nav ul ul ul,
+.toc-nav ol ol ol {
+    padding-left: 16px !important;
+}
+
+.toc-nav ul ul ul a,
+.toc-nav ol ol ol a {
+    font-size: 15px;
+}
+
+/* 折叠按钮 */
 .toc-toggle-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     cursor: pointer;
     opacity: 0.6;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.2s;
+    vertical-align: middle;
+    margin-right: 5px;
+    flex-shrink: 0;
 }
 
 .toc-toggle-btn:hover {
     opacity: 1;
+    color: #2563eb;
+}
+
+/* 暗色模式 TOC 样式 */
+[data-scheme="dark"] .toc-widget {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-scheme="dark"] .toc-collapse-all {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+[data-scheme="dark"] .toc-collapse-all:hover {
+    background: rgba(96, 165, 250, 0.3);
+    color: #93c5fd;
+}
+
+[data-scheme="dark"] .toc-nav a {
+    color: #ffffff;
+}
+
+[data-scheme="dark"] .toc-nav a:hover {
+    color: #93c5fd;
+    background: rgba(96, 165, 250, 0.2);
+}
+
+[data-scheme="dark"] .toc-nav > ul > li > a,
+[data-scheme="dark"] .toc-nav > ol > li > a {
+    color: #ffffff;
+}
+
+[data-scheme="dark"] .toc-nav ul ul a,
+[data-scheme="dark"] .toc-nav ol ol a {
+    color: #ffffff;
+}
+
+[data-scheme="dark"] .toc-nav ul ul ul a,
+[data-scheme="dark"] .toc-nav ol ol ol a {
+    color: #ffffff;
+}
+
+[data-scheme="dark"] .toc-nav ul ul,
+[data-scheme="dark"] .toc-nav ol ol {
+    border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-scheme="dark"] .toc-toggle-btn {
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+[data-scheme="dark"] .toc-toggle-btn:hover {
+    opacity: 1;
+    color: #93c5fd;
+}
+
+[data-scheme="dark"] .toc-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+[data-scheme="dark"] .toc-nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }

@@ -1,24 +1,17 @@
 {{ if (.Context.Scratch.Get "TOCEnabled") }}
-    <section class="widget archives">
-        <div class="widget-icon">
-            {{ partial "helper/icon" "hash" }}
+    <section class="widget toc-widget">
+        <div class="toc-header">
+            <button class="toc-collapse-all" id="toc-collapse-btn" title="折叠/展开全部目录">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m7 15 5 5 5-5"/>
+                    <path d="m7 9 5-5 5 5"/>
+                </svg>
+                <span>折叠目录</span>
+            </button>
         </div>
-        <h2 class="widget-title section-title">{{ T "article.tableOfContents" }}</h2>
-        
-        <div class="widget--toc">
-            <div class="toc-header">
-                <button class="toc-collapse-all" id="toc-collapse-btn" title="折叠/展开全部目录">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m7 15 5 5 5-5"/>
-                        <path d="m7 9 5-5 5 5"/>
-                    </svg>
-                    <span>折叠目录</span>
-                </button>
-            </div>
-            <nav class="toc-nav" id="TableOfContents">
-                {{ partial "article/components/toc" .Context | safeHTML }}
-            </nav>
-        </div>
+        <nav class="toc-nav" id="TableOfContents">
+            {{ partial "article/components/toc" .Context | safeHTML }}
+        </nav>
     </section>
 
     <script>
@@ -30,22 +23,32 @@
 
             // 给所有子目录的 ul 添加折叠功能
             const subLists = tocNav.querySelectorAll('li > ul, li > ol');
+            
+            // 三级目录列表
+            const thirdLevelLists = tocNav.querySelectorAll(':scope > ul > li > ul > li > ul, :scope > ul > li > ol > li > ul, :scope > ul > li > ul > li > ol, :scope > ul > li > ol > li > ol, :scope > ol > li > ul > li > ul, :scope > ol > li > ol > li > ul, :scope > ol > li > ul > li > ol, :scope > ol > li > ol > li > ol');
+            
+            // 二级目录列表
+            const secondLevelLists = tocNav.querySelectorAll(':scope > ul > li > ul, :scope > ul > li > ol, :scope > ol > li > ul, :scope > ol > li > ol');
+            
             subLists.forEach(function(subList) {
                 const parentLi = subList.parentElement;
                 const parentLink = parentLi.querySelector(':scope > a');
                 
-                // 创建折叠按钮
+                // 创建折叠按钮容器
                 const toggleBtn = document.createElement('span');
                 toggleBtn.className = 'toc-toggle-btn';
-                toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+                toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
                 toggleBtn.style.cursor = 'pointer';
-                toggleBtn.style.marginRight = '4px';
-                toggleBtn.style.display = 'inline-block';
+                toggleBtn.style.marginRight = '3px';
+                toggleBtn.style.display = 'inline-flex';
+                toggleBtn.style.alignItems = 'center';
                 toggleBtn.style.transition = 'transform 0.2s';
+                toggleBtn.style.flexShrink = '0';
                 
                 // 插入到链接前面
                 if (parentLink) {
                     parentLi.insertBefore(toggleBtn, parentLink);
+                    parentLink.style.display = 'inline';
                 }
 
                 // 点击折叠按钮
@@ -55,14 +58,26 @@
                     const isCollapsed = subList.style.display === 'none';
                     subList.style.display = isCollapsed ? '' : 'none';
                     toggleBtn.style.transform = isCollapsed ? '' : 'rotate(-90deg)';
+                    
+                    // 如果是展开二级目录，确保三级目录是折叠的
+                    if (isCollapsed) {
+                        const childThirdLevel = subList.querySelectorAll(':scope > li > ul, :scope > li > ol');
+                        childThirdLevel.forEach(function(thirdList) {
+                            thirdList.style.display = 'none';
+                            const childToggleBtn = thirdList.parentElement.querySelector('.toc-toggle-btn');
+                            if (childToggleBtn) {
+                                childToggleBtn.style.transform = 'rotate(-90deg)';
+                            }
+                        });
+                    }
                 });
             });
 
-            // 全部折叠/展开
+            // 全部折叠/展开 - 只折叠三级目录
             let allCollapsed = false;
             collapseBtn.addEventListener('click', function() {
                 allCollapsed = !allCollapsed;
-                subLists.forEach(function(subList) {
+                thirdLevelLists.forEach(function(subList) {
                     subList.style.display = allCollapsed ? 'none' : '';
                     const toggleBtn = subList.parentElement.querySelector('.toc-toggle-btn');
                     if (toggleBtn) {
