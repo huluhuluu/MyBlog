@@ -2,23 +2,27 @@
 
 ## 项目概述
 
-这是一个基于 **Hugo** 静态网站生成器的个人博客项目，使用了 **hugo-theme-stack** 主题。这是一个卡片式设计的博客主题，专为博主设计，支持响应式布局、深色/浅色模式切换、搜索功能、归档、分类和标签云等特性。
+这是 **huluhuluu** 的个人博客项目，基于 **Hugo** 静态网站生成器构建，使用 **hugo-theme-stack** 主题。博客已部署在 GitHub Pages：https://huluhuluu.github.io/
 
 ### 主要技术栈
 
-- **Hugo**: Go 语言编写的静态网站生成器 (最低版本要求: 0.154.0)
+- **Hugo Extended**: v0.155.3+ (需要 extended 版本以支持 SCSS/Sass)
 - **hugo-theme-stack**: 卡片式博客主题 (GPL-3.0 许可证)
+- **评论系统**: Giscus (基于 GitHub Discussions)
+- **部署平台**: GitHub Pages + GitHub Actions
 
 ### 主题特性
 
-- Disqus 评论系统支持
+- Giscus 评论系统支持
 - PhotoSwipe 图片画廊
 - Open Graph 元数据
 - 深色/浅色模式切换
-- 目录 (Table of Contents)
+- 目录 (Table of Contents) - 带折叠功能
 - 站内搜索
-- 多语言支持 (包括中文、英文、日文等)
+- 多语言支持 (当前配置为简体中文)
 - 小组件系统 (搜索、归档、分类、标签云)
+- Mermaid 图表支持
+- 数学公式支持 (通过 Goldmark passthrough)
 
 ---
 
@@ -26,17 +30,43 @@
 
 ```
 HugoBlog/
-├── hugo.toml          # Hugo 主配置文件
-├── archetypes/        # 内容模板 (新建文章时的默认模板)
-│   └── default.md
-├── assets/            # 自定义资源文件 (CSS, JS, 图片等)
-├── content/           # 博客内容 (文章存放位置)
-├── data/              # 数据文件
-├── i18n/              # 国际化翻译文件 (覆盖主题翻译)
-├── layouts/           # 自定义布局模板 (覆盖主题模板)
-├── static/            # 静态文件 (不会被 Hugo 处理)
-└── themes/            # 主题目录
-    └── hugo-theme-stack/  # Stack 主题 (Git 子模块)
+├── config/_default/       # 配置文件目录
+│   ├── hugo.toml          # Hugo 核心配置
+│   ├── params.toml        # 主题参数配置
+│   ├── languages.toml     # 多语言和菜单配置
+│   ├── markup.toml        # Markdown 渲染配置
+│   └── related.toml       # 相关文章推荐配置
+├── archetypes/            # 内容模板
+│   └── default.md         # 新文章默认模板
+├── assets/                # 自定义资源文件
+│   ├── img/avatar.png     # 头像
+│   └── scss/custom.scss   # 自定义样式
+├── content/               # 博客内容
+│   ├── _index.zh.md       # 首页配置
+│   ├── page/              # 静态页面
+│   │   ├── about/         # 关于页面
+│   │   ├── archives/      # 归档页面
+│   │   └── search/        # 搜索页面
+│   └── post/              # 博客文章
+│       ├── blue-eyed-islander-paradox/  # 蓝眼岛民悖论
+│       ├── hugo-blog-setup/              # 博客搭建教程
+│       ├── leetcode-logs/                # LeetCode 刷题记录
+│       ├── mad-passenger-problem/        # 疯狂乘客问题
+│       ├── mnn-tutorial/                 # MNN 端侧部署教程
+│       ├── useful-tools/                 # 实用工具推荐
+│       └── zermelo-game-theory/          # 博弈论
+├── layouts/               # 自定义布局模板
+│   ├── _markup/render-image.html  # 图片渲染模板
+│   └── _partials/
+│       ├── article/components/     # 文章组件
+│       └── widget/toc.html         # 自定义 TOC 组件
+├── static/                # 静态文件
+│   └── img/avatar.png     # 头像 (静态副本)
+├── themes/                # 主题目录 (Git 子模块)
+│   └── hugo-theme-stack/
+├── .github/workflows/     # GitHub Actions 工作流
+│   └── update-submodules.yml  # 子模块更新工作流
+└── public/                # 构建输出目录
 ```
 
 ---
@@ -60,13 +90,10 @@ hugo server -p 8080
 
 ```bash
 # 创建新文章
-hugo new post/my-first-post.md
+hugo new post/my-first-post/index.zh.md
 
 # 创建新页面
-hugo new page/about.md
-
-# 创建分类页面
-hugo new categories/my-category/_index.md
+hugo new page/about/index.zh.md
 ```
 
 ### 构建部署
@@ -78,10 +105,7 @@ hugo
 # 构建并包含草稿
 hugo -D
 
-# 指定输出目录
-hugo -d output/
-
-# 构建生产环境版本 (最小化等)
+# 构建生产环境版本 (最小化)
 hugo --minify
 ```
 
@@ -89,44 +113,72 @@ hugo --minify
 
 ## 配置说明
 
-### hugo.toml 核心配置
+### 核心配置 (hugo.toml)
 
 ```toml
-baseURL = 'https://your-domain.com/'  # 网站基础 URL
-languageCode = 'zh-cn'                # 语言代码
-title = '我的博客'                     # 网站标题
-defaultContentLanguage = 'zh'         # 默认语言
+baseURL                = "https://huluhuluu.github.io/"
+languageCode           = "zh"
+title                  = "huluhuluu"
+defaultContentLanguage = "zh"
+hasCJKLanguage         = true
+theme                  = "hugo-theme-stack"
+
+[pagination]
+    pagerSize = 10
+
+[permalinks]
+    post = "/p/:slug/"
+    page = "/:slug/"
+
+# 模块挂载配置 (用于 MNN-TUTORIAL 子目录)
+[module]
+    [[module.mounts]]
+        source = "content"
+        target = "content"
+        excludeFiles = ["post/mnn-tutorial/blog/**"]
+    [[module.mounts]]
+        source = "content/post/mnn-tutorial/blog"
+        target = "content/post"
 ```
 
-### 主题配置目录结构
-
-主题的完整配置可参考 `themes/hugo-theme-stack/demo/config/_default/` 目录:
-
-- `hugo.toml` - Hugo 核心配置
-- `params.toml` - 主题参数配置
-- `languages.toml` - 多语言配置
-- `menu.toml` - 菜单和社交链接配置
-- `markup.toml` - Markdown 渲染配置
-- `related.toml` - 相关文章推荐配置
-
-### 主要参数配置 (params.toml)
+### 评论配置 (params.toml - Giscus)
 
 ```toml
-mainSections = ["post"]    # 主要内容分区
-rssFullContent = true      # RSS 包含完整内容
+[comments]
+    enabled  = true
+    provider = "giscus"
 
-[sidebar]
-    emoji = "📝"           # 侧边栏表情图标
-    subtitle = "博客副标题"
-    avatar = "img/avatar.png"
+    [comments.giscus]
+        repo             = "huluhuluu/MyBlog"
+        category         = "Announcements"
+        mapping          = "pathname"
+        lightTheme       = "light"
+        darkTheme        = "dark_dimmed"
+        reactionsEnabled = 1
+        lang             = "zh-CN"
+```
 
-[widgets]
-    homepage = [
-        { type = "search" },
-        { type = "archives", params = { limit = 5 } },
-        { type = "categories", params = { limit = 10 } },
-        { type = "tag-cloud", params = { limit = 10 } },
-    ]
+### Markdown 渲染配置 (markup.toml)
+
+```toml
+[goldmark]
+    [goldmark.extensions.passthrough]
+        enable = true
+        [goldmark.extensions.passthrough.delimiters]
+            block  = [["\\[", "\\]"], ["$$", "$$"]]
+            inline = [["\\(", "\\)"]]
+
+[highlight]
+    noClasses = false
+    lineNos   = true
+```
+
+### 文章许可协议
+
+```toml
+[article.license]
+    enabled = true
+    default = "Licensed under CC BY-NC-SA 4.0"
 ```
 
 ---
@@ -139,21 +191,97 @@ rssFullContent = true      # RSS 包含完整内容
 ---
 title: "文章标题"
 date: 2024-01-01
+lastmod: 2024-01-02
 draft: false
 description: "文章描述"
+slug: "article-slug"
 tags: ["标签1", "标签2"]
 categories: ["分类"]
+comments: true
 ---
+```
+
+### 文章目录结构
+
+建议每篇文章使用独立目录，方便管理图片资源：
+
+```
+content/post/my-article/
+├── index.zh.md      # 文章内容
+└── images/          # 文章图片
+    ├── image1.png
+    └── image2.png
 ```
 
 ### Markdown 扩展功能
 
-主题支持以下扩展功能:
-
 - **数学公式**: 使用 `$...$` (行内) 或 `$$...$$` (块级)
 - **代码高亮**: 支持语法高亮和行号
 - **Mermaid 图表**: 使用 ```mermaid 代码块
-- **图片画廊**: 自动识别图片组生成画廊
+- **Alert 容器**: 支持 note/tip/important/warning/caution
+
+---
+
+## 自定义组件
+
+### TOC 目录组件
+
+项目实现了自定义的 TOC 组件 (`layouts/_partials/widget/toc.html`)，功能包括：
+
+- 三级目录折叠功能
+- 一键折叠/展开按钮
+- 滚动条样式优化
+- 深色模式适配
+
+### 自定义样式
+
+在 `assets/scss/custom.scss` 中定义了：
+
+- 侧边栏间距调整
+- TOC 目录样式 (圆角卡片、折叠按钮)
+- 分页组件居中
+- 滚动条美化
+- 深色模式适配
+
+---
+
+## 部署说明
+
+### 当前部署方案
+
+博客使用 **GitHub Pages** 部署，通过 **GitHub Actions** 自动构建。
+
+### 子模块更新工作流
+
+`.github/workflows/update-submodules.yml` 用于自动更新主题子模块：
+
+- 触发方式：`repository_dispatch` 或手动触发
+- 功能：自动拉取主题最新代码并提交
+
+### 主题更新
+
+主题作为 Git 子模块引入，更新方式：
+
+```bash
+git submodule update --remote themes/hugo-theme-stack
+```
+
+---
+
+## 特殊功能
+
+### 多内容源挂载
+
+项目配置了 Hugo 模块挂载，将 `content/post/mnn-tutorial/blog` 目录的内容作为独立文章挂载：
+
+```toml
+[module]
+    [[module.mounts]]
+        source = "content/post/mnn-tutorial/blog"
+        target = "content/post"
+```
+
+这允许 MNN 教程系列文章在独立子目录中管理，同时作为博客文章发布。
 
 ---
 
@@ -167,38 +295,22 @@ categories: ["分类"]
 
 ### 资源管理
 
-- 图片资源放在 `assets/` 或 `static/` 目录
+- 图片资源放在文章目录的 `images/` 子目录或 `assets/` 目录
 - `assets/` 中的资源会被 Hugo 处理 (压缩、指纹等)
 - `static/` 中的资源直接复制到输出目录
 
 ---
 
-## 部署建议
+## 博客文章索引
 
-### 常见部署平台
-
-- **GitHub Pages**: 使用 GitHub Actions 自动部署
-- **Netlify**: 连接 Git 仓库自动构建
-- **Vercel**: 支持 Hugo 的自动部署
-- **Cloudflare Pages**: 免费静态网站托管
-
-### 构建命令
-
-```bash
-hugo --minify
-```
-
-输出目录: `public/`
-
----
-
-## 主题更新
-
-主题作为 Git 子模块引入，更新方式:
-
-```bash
-git submodule update --remote themes/hugo-theme-stack
-```
+| 文章 | 分类 | 说明 |
+|------|------|------|
+| [个人博客搭建记录](/p/hugo-blog-setup/) | 技术记录 | Hugo + GitHub + Vercel 搭建教程 |
+| [MNN端侧部署教程](/p/mnn-tutorial/) | MNN端侧部署 | MNN 框架从环境配置到 LLM 部署 |
+| [蓝眼岛民悖论](/p/blue-eyed-islander-paradox/) | - | 逻辑推理 |
+| [疯狂乘客问题](/p/mad-passenger-problem/) | - | 概率问题 |
+| [博弈论](/p/zermelo-game-theory/) | - | Zermelo 博弈论 |
+| [实用工具推荐](/p/useful-tools/) | - | 工具推荐 |
 
 ---
 
@@ -208,3 +320,4 @@ git submodule update --remote themes/hugo-theme-stack
 - [Stack 主题文档](https://stack.cai.im)
 - [Stack 主题中文文档](https://stack.cai.im/zh)
 - [Stack 主题 GitHub](https://github.com/CaiJimmy/hugo-theme-stack)
+- [Giscus 评论系统](https://giscus.app/zh-CN)

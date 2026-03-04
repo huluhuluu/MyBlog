@@ -7,3 +7,6 @@
 [submodule "content/post/leetcode-logs"]
 	path = content/post/leetcode-logs
 	url = https://github.com/huluhuluu/Leetcode-Logs.git
+[submodule "content/post/useful-tools"]
+	path = content/post/useful-tools
+	url = https://github.com/huluhuluu/useful-tools.git
