@@ -23,6 +23,7 @@
 - 小组件系统 (搜索、归档、分类、标签云)
 - Mermaid 图表支持
 - 数学公式支持 (通过 Goldmark passthrough)
+- Alert 容器 (note/tip/important/warning/caution)
 
 ---
 
@@ -50,15 +51,15 @@ HugoBlog/
 │   └── post/              # 博客文章
 │       ├── blue-eyed-islander-paradox/  # 蓝眼岛民悖论
 │       ├── hugo-blog-setup/              # 博客搭建教程
-│       ├── leetcode-logs/                # LeetCode 刷题记录
+│       ├── leetcode-logs/                # LeetCode 刷题记录 (Git 子模块)
 │       ├── mad-passenger-problem/        # 疯狂乘客问题
-│       ├── mnn-tutorial/                 # MNN 端侧部署教程
-│       ├── useful-tools/                 # 实用工具推荐
+│       ├── mnn-tutorial/                 # MNN 端侧部署教程 (Git 子模块)
+│       ├── useful-tools/                 # 实用工具推荐 (Git 子模块)
 │       └── zermelo-game-theory/          # 博弈论
 ├── layouts/               # 自定义布局模板
 │   ├── _markup/render-image.html  # 图片渲染模板
 │   └── _partials/
-│       ├── article/components/     # 文章组件
+│       ├── article/components/     # 文章组件 (header, footer)
 │       └── widget/toc.html         # 自定义 TOC 组件
 ├── static/                # 静态文件
 │   └── img/avatar.png     # 头像 (静态副本)
@@ -67,6 +68,32 @@ HugoBlog/
 ├── .github/workflows/     # GitHub Actions 工作流
 │   └── update-submodules.yml  # 子模块更新工作流
 └── public/                # 构建输出目录
+```
+
+---
+
+## Git 子模块管理
+
+项目使用多个 Git 子模块来管理独立的内容仓库：
+
+| 子模块路径 | 仓库地址 | 说明 |
+|-----------|---------|------|
+| `themes/hugo-theme-stack` | CaiJimmy/hugo-theme-stack | 博客主题 |
+| `content/post/mnn-tutorial` | huluhuluu/MNN-TUTORIAL | MNN 端侧部署教程 |
+| `content/post/leetcode-logs` | huluhuluu/Leetcode-Logs | LeetCode 刷题记录 |
+| `content/post/useful-tools` | huluhuluu/useful-tools | 实用工具推荐 |
+
+### 子模块常用命令
+
+```bash
+# 初始化并拉取所有子模块
+git submodule update --init --recursive
+
+# 更新所有子模块到最新版本
+git submodule update --remote --merge
+
+# 更新单个子模块
+git submodule update --remote themes/hugo-theme-stack
 ```
 
 ---
@@ -168,9 +195,25 @@ theme                  = "hugo-theme-stack"
             block  = [["\\[", "\\]"], ["$$", "$$"]]
             inline = [["\\(", "\\)"]]
 
+[tableOfContents]
+    endLevel   = 4
+    startLevel = 1
+
 [highlight]
     noClasses = false
     lineNos   = true
+```
+
+### 相关文章推荐配置 (related.toml)
+
+```toml
+includeNewer = true
+threshold    = 60
+toLower      = false
+indices      = [
+    { name = "tags", weight = 100 },
+    { name = "categories", weight = 200 },
+]
 ```
 
 ### 文章许可协议
@@ -229,7 +272,8 @@ content/post/my-article/
 项目实现了自定义的 TOC 组件 (`layouts/_partials/widget/toc.html`)，功能包括：
 
 - 三级目录折叠功能
-- 一键折叠/展开按钮
+- 一键折叠/展开按钮 (仅控制三级目录)
+- 二级目录独立折叠按钮
 - 滚动条样式优化
 - 深色模式适配
 
@@ -257,14 +301,7 @@ content/post/my-article/
 
 - 触发方式：`repository_dispatch` 或手动触发
 - 功能：自动拉取主题最新代码并提交
-
-### 主题更新
-
-主题作为 Git 子模块引入，更新方式：
-
-```bash
-git submodule update --remote themes/hugo-theme-stack
-```
+- 需要 `PAT` (Personal Access Token) 作为 Secret
 
 ---
 
@@ -282,6 +319,8 @@ git submodule update --remote themes/hugo-theme-stack
 ```
 
 这允许 MNN 教程系列文章在独立子目录中管理，同时作为博客文章发布。
+
+**注意**: `leetcode-logs` 和 `useful-tools` 子模块通过各自目录下的 `index.zh.md` 文件引用子模块内容，未使用模块挂载。
 
 ---
 
@@ -307,10 +346,11 @@ git submodule update --remote themes/hugo-theme-stack
 |------|------|------|
 | [个人博客搭建记录](/p/hugo-blog-setup/) | 技术记录 | Hugo + GitHub + Vercel 搭建教程 |
 | [MNN端侧部署教程](/p/mnn-tutorial/) | MNN端侧部署 | MNN 框架从环境配置到 LLM 部署 |
+| [LeetCode 刷题记录](/p/leetcode-logs/) | LeetCode | 每日刷题、Hot100、总结 |
+| [实用工具推荐](/p/useful-tools/) | 工具 | VSCode、AI Agent、终端工具配置 |
 | [蓝眼岛民悖论](/p/blue-eyed-islander-paradox/) | - | 逻辑推理 |
 | [疯狂乘客问题](/p/mad-passenger-problem/) | - | 概率问题 |
 | [博弈论](/p/zermelo-game-theory/) | - | Zermelo 博弈论 |
-| [实用工具推荐](/p/useful-tools/) | - | 工具推荐 |
 
 ---
 

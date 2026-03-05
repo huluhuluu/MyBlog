@@ -32,7 +32,7 @@ comments: true
   ![环境变量](images/env-vars.png)
 
    - 点击环境变量
-   
+  
    ![编辑环境变量](images/edit-env-vars.png)
 
    - 选中并且编辑**用户环境变量Path** -> **新建**一个路径 -> 粘贴刚刚解压的预编译版本的路径，最后一路点击确定，环境变量设置好了。
@@ -51,7 +51,7 @@ comments: true
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser  -Force # 修改默认策略为同意
    iwr -useb scoop.201704.xyz | iex # 安装scoop到用户目录 这里使用的镜像站
    scoop help # 有正常输出说明成功安装
-
+   
    scoop install main/sass # 安装sass
    sass --version # 输出版本号说明成功安装 1.83.4
    ```
@@ -107,18 +107,18 @@ comments: true
    hugo server --themesDir ../.. # 启动hugo
       # 出现下面输出
    blog\MyBlog\themes\anatole\exampleSite> hugo server --themesDir ../..
-
+   
    Watching for changes in ...
    Start building sites …
    hugo v0.155.3-8a858213b73907e823e2be2b5640a0ce4c04d295+extended windows/amd64 BuildDate=2026-02-08T16:40:42Z VendorInfo=gohugoio
-
+   
    WARN  The "x" shortcode was unable to retrieve the remote data: template: _shortcodes/x.html:20:25: executing "render-x" at <resources.GetRemote>: error calling GetRemote: Get "https://publish.x.com/oembed?dnt=false&url=https%3A%2F%2Fx.com%2FSanDiegoZoo%2Fstatus%2F1453110110599868418": net/http: TLS handshake timeout. See "blog\MyBlog\themes\anatole\exampleSite\content\english\post\rich-content.md:26:1"
    You can suppress this warning by adding the following to your site configuration:
    ignoreLogs = ['shortcode-x-getremote']
    WARN  The "vimeo_simple" shortcode was unable to retrieve the remote data: template: _shortcodes/vimeo_simple.html:26:25: executing "render-vimeo" at <resources.GetRemote>: error calling GetRemote: Get "https://vimeo.com/api/oembed.json?dnt=0&url=https%3A%2F%2Fvimeo.com%2F48912912": dial tcp 31.13.94.41:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host did not properly respond.. See "blog\MyBlog\themes\anatole\exampleSite\content\english\post\rich-content.md:34:1"
    You can suppress this warning by adding the following to your site configuration:
    ignoreLogs = ['shortcode-vimeo-simple']
-
+   
                      │ EN │ AR
    ──────────────────┼────┼────
    Pages            │ 68 │ 20
@@ -128,7 +128,7 @@ comments: true
    Processed images │  0 │  0
    Aliases          │ 13 │  9
    Cleaned          │  0 │  0
-
+   
    Built in 31850 ms
    Environment: "development"
    Serving pages from disk
@@ -176,7 +176,7 @@ MyBlog/
    blog\MyBlog> git commit -m "init repo"	# 保存暂存区修改
    [master (root-commit) 94d3942] init repo
    46 files changed, 1088 insertions(+)
-
+   
    blog\MyBlog> git push -u origin master # 推送至远程仓库
    Enumerating objects: 62, done.
    Counting objects: 100% (62/62), done.
@@ -194,7 +194,7 @@ MyBlog/
    # .gitignore 文件
    public/
    resources/
-
+   
    # agents 相关文件
    AGENTS.md
    ```
@@ -229,10 +229,13 @@ MyBlog/
    访问即可看到部署好的博客
    ![访问博客](images/visit-blog.png)
    
-### 3.1 添加博客
+
+###  3.1 添加博客
+
 后续添加博客需要在本地content/post/目录下新建markdown文件，添加内容后提交到github仓库，vercel会自动检测到变化并且重新构建和部署，访问博客即可看到更新后的内容。
 
-## 3.2 评论系统Giscus
+### 3.2 评论系统Giscus
+
 [Giscus](https://giscus.app/)是一个基于GitHub Discussions的评论系统，可以方便地集成到博客中([参考教程](https://www.lixueduan.com/posts/blog/02-add-giscus-comment/)，[官方教程](https://giscus.app/zh-CN))。
 
 - 第一步，在GitHub仓库中点击设置
@@ -251,7 +254,7 @@ MyBlog/
 - 第三步，在Hugo博客的配置文件中添加Giscus的相关设置。例如这里添加在`params.toml`中：
    ![添加配置](images/giscus-config.png)
 
-## 3.3 子仓库自动更新
+### 3.3 子仓库自动更新
 如果博客中使用了`git submodule`管理内容，那么每次更新子模块后需要在主仓库中提交子模块的更新，否则vercel部署时会拉取不到最新版本。例如这里我在`content/post/mnn-tutorial`子模块中更新了内容，提交并且推送到远程仓库后，还需要在主仓库中提交子模块的更新：
 
 ```powershell
@@ -275,13 +278,13 @@ blog\MyBlog> git push origin master # 推送至远程仓库
 - `GitHub Actions` 通过编写工作流文件来定义自动化流程，需要在主仓库的 `.github/workflows` 目录下新建文件，例如命名为`update-submodule.yml`，并且添加内容(下面内容来自[iflow](../useful-tools/index.zh.md/#14-iflow)生成)：
    ```yaml
    name: Update Submodules
-
+   
    on:
    # 接收来自子仓库的 repository_dispatch 事件
    repository_dispatch:
       types: [update-submodules] # 事件类型，需与子仓库发送的事件名一致
    workflow_dispatch:
-
+   
    jobs:
    update:
       runs-on: ubuntu-latest # 运行环境
@@ -291,11 +294,11 @@ blog\MyBlog> git push origin master # 推送至远程仓库
             submodules: true
             fetch-depth: 0
             token: ${{ secrets.PAT }}
-
+   
           # 更新子模块到远程最新版本
          - name: Update submodules
          run: git submodule update --remote --merge
-
+   
          # 提交更改并推送
          - name: Commit and push
          run: |
@@ -309,7 +312,7 @@ blog\MyBlog> git push origin master # 推送至远程仓库
 - 同时需要在子仓库的 `.github/workflows` 目录下添加提醒的工作流文件，例如命名为`notify-parent.yml`，并且添加内容：
    ```yaml
    name: Notify Parent Repo
-
+   
    # 触发条件：推送到 main 或 master 分支时
    on:
    push:

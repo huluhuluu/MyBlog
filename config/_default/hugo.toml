@@ -21,12 +21,18 @@ theme                  = "hugo-theme-stack"
     filename   = "sitemap.xml"
     priority   = 0.5
 
-# Mount MNN-TUTORIAL blog content as separate posts
+# Mount submodule blog content as separate posts
 [module]
     [[module.mounts]]
         source = "content"
         target = "content"
-        excludeFiles = ["post/mnn-tutorial/blog/**"]
+        excludeFiles = ["post/mnn-tutorial/blog/**", "post/useful-tools/blog/**", "post/leetcode-logs/blog/**"]
     [[module.mounts]]
         source = "content/post/mnn-tutorial/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/useful-tools/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/leetcode-logs/blog"
         target = "content/post"
