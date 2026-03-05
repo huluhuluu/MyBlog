@@ -8,6 +8,7 @@ slug: "hugo-blog-setup"
 tags: ["Hugo", "博客", "Vercel", "GitHub"]
 categories: ["技术记录"]
 comments: true
+math: true
 ---
 
 本博客使用hugo + github + vercel方案部署，记录时间2026/2/25，[参考教程](https://hongtaoh.com/cn/2024/03/22/personal-website-tutorial/)来自[郝鸿涛](https://hongtaoh.com/cn/blog/)博主。
@@ -198,6 +199,39 @@ MyBlog/
    # agents 相关文件
    AGENTS.md
    ```
+### 2.3 Front Matter说明
+Front Matter 是 Hugo 文章头部的元数据部分，使用 YAML、TOML 或 JSON 格式编写。以下是一些常用的特殊标记：
+- `draft: true`：如果在文章的 Front Matter 中添加了 `draft: true`，Hugo 在构建时会忽略这篇文章，不会生成对应的 HTML 页面。这对于正在撰写或不想公开的文章非常有用。
+- `math: true`：如果在文章的 Front Matter 中添加了 `math: true`，Hugo 会启用数学公式的渲染支持，允许在文章中使用 LaTeX 语法编写数学公式，并且在构建时正确渲染成 HTML 格式。这对于需要展示数学内容的博客文章非常有用。
+- `comments: true`：如果在文章的 Front Matter 中添加了 `comments: true`，Hugo 会启用评论功能，允许读者在文章页面下方发表评论。这通常需要配合第三方评论系统（如 Disqus、Giscus 等）使用，以便读者能够留下反馈和讨论。
+- `categories` 和 `tags`：这两个字段用于对文章进行分类和标签化，方便读者通过分类和标签浏览相关内容。`categories` 通常用于较大的主题分类，而 `tags` 则用于更具体的关键词标记。
+- `slug`：这个字段用于指定文章的 URL 路径，如果不设置，Hugo 会根据文章标题自动生成一个 slug。通过设置 `slug`，你可以自定义文章的 URL，使其更简洁。
+
+### 2.4 hugo.toml 说明
+`hugo.toml` 是 Hugo 站点的主配置文件，使用 TOML 格式编写。以下是一些常用的配置项：
+- `baseURL`：指定站点的基础 URL，通常是你博客的域名，例如 `https://www.example.com/`。这个配置对于生成正确的链接和资源路径非常重要。
+- `theme`：指定站点使用的主题名称，与 `themes/` 目录下的主题文件夹名称一致.
+- `paginate`：指定每页显示的文章数量，例如 `paginate = 10` 表示每页显示 10 篇文章。
+- `permalinks`：配置文章的 URL 结构，例如：
+   ```toml
+   [permalinks]
+      post = "/:year/:month/:day/:slug/"
+   ```
+   这表示文章的 URL 将包含年份、月份、日期和 slug，例如 `https://www.example.com/post/2026/02/25/my-article/`。
+- `module`:  模块挂载系统:
+   ```toml
+   [module]
+    [[module.mounts]]   
+        source = "content"
+        target = "content"
+        excludeFiles = ["post/b1/blog/**"]
+    
+    [[module.mounts]]
+        source = "content/post/b1/blog"
+        target = "content/post"
+   ```
+   使用多个子模块管理内容，并且通过模块挂载系统把子模块中的内容挂载到主仓库的content目录下，方便管理和部署。
+   这里把`content/post/b1/blog`目录下的内容挂载到`content/post`目录下，部署时会把`content/post/b1/blog`目录下的内容部署到`content/post`目录下。
 
 ## 3. vercel部署
 这里分静态部署和动态部署两种方式，静态部署是指在本地构建好的静态文件，动态部署是指每次修改内容后直接推送到github，vercel会自动检测到变化并且重新构建和部署。这里选择动态部署的方式:
@@ -335,3 +369,34 @@ blog\MyBlog> git push origin master # 推送至远程仓库
    ![子仓库工作流](images/submodule-workflow.png)
 - 查看主仓库的`GitHub Actions`是否触发了更新子模块的工作流。
    ![主仓库工作流](images/main-repo-workflow.png)
+
+### 3.4 更新环境变量
+如果需要更新环境变量，例如之前配置的`HUGO_VERSION`，可以在vercel项目设置界面找到`Environment Variables`，点击编辑即可修改环境变量的值，修改后需要重新部署才能生效。
+- 第一步，进入vercel，打开项目设置界面
+   ![打开项目设置](images/vercel-project-settings-menu.png)
+- 第二步，找到`Environment Variables`，点击编辑
+   ![编辑环境变量](images/vercel-env-vars-edit-menu.png)
+- 第三步，修改环境变量的值，例如把`HUGO_VERSION`修改为`0.157.0`，点击保存
+
+### 3.5 锁定themes子仓库
+子仓库更新后可能对HUGO版本限制更高，导致Vercel部署失败, 可以在主仓库中锁定子仓库的版本，避免每次子仓库更新后都需要修改主仓库的子模块版本。
+```powershell
+# 进入子模块目录
+blog\HugoBlog> cd .\themes\hugo-theme-stack\
+
+# git log 查看提交历史，找到需要锁定的版本的Commit Hash，复制下来，例如22edce91ab046abdd91f3b72031d0c07a04b1292
+
+# 或者切换到具体的 Commit Hash (最精确的锁定)
+blog\HugoBlog\themes\hugo-theme-stack> git checkout 22edce91ab046abdd91f3b72031d0c07a04b1292
+HEAD is now at 22edce9 feat: add responsive image support (#1283)
+
+# 返回主仓库查看当前子模块状态，确认已经锁定到指定版本
+blog\HugoBlog\themes\hugo-theme-stack> cd ../../
+blog\HugoBlog> git submodule status
+ 22edce91ab046abdd91f3b72031d0c07a04b1292 themes/hugo-theme-stack (v4.0.0-beta.8)
+
+# 提交主仓库的子模块更新
+blog\HugoBlog> git add themes/hugo-theme-stack
+blog\HugoBlog> git commit -m "Lock hugo-theme-stack to v4.0.0-beta.8"
+blog\HugoBlog> git push
+```

@@ -8,6 +8,7 @@ slug: "blue-eyed-islander-paradox"
 tags: ["逻辑", "悖论", "分享"]
 categories: ["分享"]
 comments: true
+math: true
 ---
 
 最近看到一个很有意思的逻辑谜题，叫「蓝眼睛岛民悖论」，出自[这个视频](https://www.bilibili.com/video/BV1FdWEzwEDw/)。乍一看觉得答案很反直觉，仔细想想又觉得有道理，再深入一想又觉得哪里不对……就这么反复横跳，挺有意思的，记录一下。

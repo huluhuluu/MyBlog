@@ -8,6 +8,7 @@ slug: "mad-passenger-problem"
 tags: ["博弈论", "悖论", "分享"]
 categories: ["分享"]
 comments: true
+math: true
 ---
 
 最近又看到一个有趣的博弈论问题，叫「疯子乘客问题」，和之前分享的蓝眼睛岛民悖论有点像，都是那种乍一看很简单，仔细一想又觉得哪里不对的题目。

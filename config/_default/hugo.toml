@@ -1,4 +1,4 @@
-baseURL                = "https://huluhuluu.github.io/"
+baseURL                = "https://my-blog-p39q.vercel.app/"
 languageCode           = "zh"
 title                  = "huluhuluu"
 # Theme i18n support
@@ -22,6 +22,7 @@ theme                  = "hugo-theme-stack"
     priority   = 0.5
 
 # Mount submodule blog content as separate posts
+# Use excludeFiles to prevent duplicate processing
 [module]
     [[module.mounts]]
         source = "content"
