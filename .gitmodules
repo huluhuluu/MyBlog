@@ -10,3 +10,15 @@
 [submodule "content/post/useful-tools"]
 	path = content/post/useful-tools
 	url = https://github.com/huluhuluu/useful-tools.git
+[submodule "content/post/opencl-tutorial"]
+	path = content/post/opencl-tutorial
+	url = https://github.com/huluhuluu/opencl-tutorial.git
+[submodule "content/post/qnn-tutorial"]
+	path = content/post/qnn-tutorial
+	url = https://github.com/huluhuluu/qnn-tutorial.git
+[submodule "content/post/paper-view"]
+	path = content/post/paper-view
+	url = https://github.com/huluhuluu/paper-view.git
+[submodule "content/post/transformers-code-view"]
+	path = content/post/transformers-code-view
+	url = https://github.com/huluhuluu/transformers-code-view.git
