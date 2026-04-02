@@ -22,3 +22,6 @@
 [submodule "content/post/transformers-code-view"]
 	path = content/post/transformers-code-view
 	url = https://github.com/huluhuluu/transformers-code-view.git
+[submodule "content/post/brain-candy"]
+	path = content/post/brain-candy
+	url = https://github.com/huluhuluu/brain-candy.git

@@ -5,13 +5,14 @@ lastmod: 2026-02-25T12:00:00+08:00
 draft: false
 description: "使用 GitHub + Hugo + Vercel 搭建个人博客的完整记录"
 slug: "hugo-blog-setup"
-tags: ["Hugo", "博客", "Vercel", "GitHub"]
-categories: ["技术记录"]
+tags: ["technical"]
+categories: ["technical"]
+
 comments: true
 math: true
 ---
 
-本博客使用hugo + github + vercel方案部署，记录时间2026/2/25，[参考教程](https://hongtaoh.com/cn/2024/03/22/personal-website-tutorial/)来自[郝鸿涛](https://hongtaoh.com/cn/blog/)博主。
+本博客使用 Hugo + GitHub + Vercel 方案部署，记录时间2026/2/25，[参考 tutorial](https://hongtaoh.com/cn/2024/03/22/personal-website-tutorial/)来自[郝鸿涛](https://hongtaoh.com/cn/blog/)博主。
 
 ## 0. 前置知识
 
@@ -21,7 +22,7 @@ math: true
 
 ## 1. Hugo安装
 
-本方案中[Hugo](https://github.com/gohugoio/hugo)可以选择在本地运行构建，也可以选择在vercel上构建。由于调试需求，本方案在本地**windows系统**中安装Hugo并且调试博客，后续部署到vercel上。
+本方案中[Hugo](https://github.com/gohugoio/hugo)可以选择在本地运行构建，也可以选择在vercel上构建。由于调试需求，本方案在本地**Windows系统**中安装Hugo并且调试博客，后续部署到vercel上。
 
 - 第一步，下载。根据系统选择[安装方式](https://gohugo.io/installation/)。根据指引到github的[发布界面](https://github.com/gohugoio/hugo/releases/latest)下载预编译的二进制包，下滑找到对应的系统/架构。
   
@@ -46,7 +47,7 @@ math: true
    hugo v0.155.3-8a858213b73907e823e2be2b5640a0ce4c04d295+extended windows/amd64 BuildDate=2026-02-08T16:40:42Z VendorInfo=gohugoio
    ```
 
-- 第三步，安装编译器[Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass)。windows下需要使用包管理器[Scoop](https://scoop.sh/#/apps?q=sass)或者[Chocolatey](https://community.chocolatey.org/packages/sass)，下面以Scoop为例，[安装Scoop参考教程](https://zhuanlan.zhihu.com/p/1931641798855458999)
+- 第三步，安装编译器[Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass)。windows下需要使用包管理器[Scoop](https://scoop.sh/#/apps?q=sass)或者[Chocolatey](https://community.chocolatey.org/packages/sass)，下面以Scoop为例，[安装Scoop参考tutorial](https://zhuanlan.zhihu.com/p/1931641798855458999)
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser  -Force # 修改默认策略为同意
@@ -59,7 +60,7 @@ math: true
 
 ## 2. 搭建站点
 
-- 第一步， 本地继续使用`powershell`用`Hugo`初始化一个目录用来存放所有文件，并且**移动到改目录下**
+- 第一步， 本地继续使用`powershell`用`Hugo`初始化一个目录用来存放所有文件，并且**移动到该目录下**
 
    ```powershell
    blog> hugo new site MyBlog # 在当前目录下创建一个新的 Hugo 站点，目录名为 MyBlog
@@ -70,8 +71,8 @@ math: true
    1. Change the current directory to blog\MyBlog.
    2. Create or install a theme:
       - Create a new theme with the command "hugo new theme <THEMENAME>"
-      - Or, install a theme from https://themes.gohugo.io/
-   3. Edit hugo.toml, setting the "theme" property to the theme name.
+      - Or,  install a theme from https://themes.gohugo.io/
+   3. Edit hugo.toml,  setting the "theme" property to the theme name.
    4. Create new content with the command "hugo new content <SECTIONNAME>\<FILENAME>.<FORMAT>".
    5. Start the embedded web server with the command "hugo server --buildDrafts".
 
@@ -94,10 +95,10 @@ math: true
    ```powershell
    blog\MyBlog> git submodule add https://github.com/lxndrblz/anatole.git themes/anatole
    Cloning into '/blog/MyBlog/themes/anatole'...
-   remote: Enumerating objects: 5345, done.
-   Receiving objects: 100% (5345/5345), 7.96 MiB | 4.72 MiB/s, done.5 (from 1)Receiving objects: 100% (5345/5345), 1.49 MiB | 1.21 MiB/s
+   remote: Enumerating objects: 5345,  done.
+   Receiving objects: 100% (5345/5345),  7.96 MiB | 4.72 MiB/s,  done.5 (from 1)Receiving objects: 100% (5345/5345),  1.49 MiB | 1.21 MiB/s
 
-   Resolving deltas: 100% (3145/3145), done.
+   Resolving deltas: 100% (3145/3145),  done.
    blog\MyBlog> Add-Content -Path "hugo.toml" -Value "`ntheme = `"anatole`""
    ```
 
@@ -116,7 +117,7 @@ math: true
    WARN  The "x" shortcode was unable to retrieve the remote data: template: _shortcodes/x.html:20:25: executing "render-x" at <resources.GetRemote>: error calling GetRemote: Get "https://publish.x.com/oembed?dnt=false&url=https%3A%2F%2Fx.com%2FSanDiegoZoo%2Fstatus%2F1453110110599868418": net/http: TLS handshake timeout. See "blog\MyBlog\themes\anatole\exampleSite\content\english\post\rich-content.md:26:1"
    You can suppress this warning by adding the following to your site configuration:
    ignoreLogs = ['shortcode-x-getremote']
-   WARN  The "vimeo_simple" shortcode was unable to retrieve the remote data: template: _shortcodes/vimeo_simple.html:26:25: executing "render-vimeo" at <resources.GetRemote>: error calling GetRemote: Get "https://vimeo.com/api/oembed.json?dnt=0&url=https%3A%2F%2Fvimeo.com%2F48912912": dial tcp 31.13.94.41:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host did not properly respond.. See "blog\MyBlog\themes\anatole\exampleSite\content\english\post\rich-content.md:34:1"
+   WARN  The "vimeo_simple" shortcode was unable to retrieve the remote data: template: _shortcodes/vimeo_simple.html:26:25: executing "render-vimeo" at <resources.GetRemote>: error calling GetRemote: Get "https://vimeo.com/api/oembed.json?dnt=0&url=https%3A%2F%2Fvimeo.com%2F48912912": dial tcp 31.13.94.41:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time,  or established connection failed because connected host did not properly respond.. See "blog\MyBlog\themes\anatole\exampleSite\content\english\post\rich-content.md:34:1"
    You can suppress this warning by adding the following to your site configuration:
    ignoreLogs = ['shortcode-vimeo-simple']
    
@@ -176,16 +177,16 @@ MyBlog/
    blog\MyBlog> git add . # 添加修改到暂存区
    blog\MyBlog> git commit -m "init repo"	# 保存暂存区修改
    [master (root-commit) 94d3942] init repo
-   46 files changed, 1088 insertions(+)
+   46 files changed,  1088 insertions(+)
    
    blog\MyBlog> git push -u origin master # 推送至远程仓库
-   Enumerating objects: 62, done.
-   Counting objects: 100% (62/62), done.
+   Enumerating objects: 62,  done.
+   Counting objects: 100% (62/62),  done.
    Delta compression using up to 16 threads
-   Compressing objects: 100% (53/53), done.
-   Writing objects: 100% (62/62), 735.91 KiB | 21.64 MiB/s, done.
-   Total 62 (delta 1), reused 0 (delta 1), pack-reused 0
-   remote: Resolving deltas: 100% (1/1), done.
+   Compressing objects: 100% (53/53),  done.
+   Writing objects: 100% (62/62),  735.91 KiB | 21.64 MiB/s,  done.
+   Total 62 (delta 1),  reused 0 (delta 1),  pack-reused 0
+   remote: Resolving deltas: 100% (1/1),  done.
    To https://github.com/huluhuluu/MyBlog.git
    * [new branch]      master -> master
    branch 'master' set up to track 'origin/master'.
@@ -236,11 +237,11 @@ Front Matter 是 Hugo 文章头部的元数据部分，使用 YAML、TOML 或 JS
 ## 3. vercel部署
 这里分静态部署和动态部署两种方式，静态部署是指在本地构建好的静态文件，动态部署是指每次修改内容后直接推送到github，vercel会自动检测到变化并且重新构建和部署。这里选择动态部署的方式:
 
-- 打开[Vercel](https://vercel.com/),点击`Add New -> Project`新建项目，使用github快速登录
+- 打开[Vercel](https://vercel.com/), 点击`Add New -> Project`新建项目，使用github快速登录
 
    ![Vercel登录](images/vercel-login.png)
 
-- 选择个人账号里需要部署的仓库, 点击Install继续：
+- 选择个人账号里需要部署的仓库,  点击Install继续：
 
    ![选择仓库](images/select-repo.png)
 
@@ -270,7 +271,7 @@ Front Matter 是 Hugo 文章头部的元数据部分，使用 YAML、TOML 或 JS
 
 ### 3.2 评论系统Giscus
 
-[Giscus](https://giscus.app/)是一个基于GitHub Discussions的评论系统，可以方便地集成到博客中([参考教程](https://www.lixueduan.com/posts/blog/02-add-giscus-comment/)，[官方教程](https://giscus.app/zh-CN))。
+[Giscus](https://giscus.app/)是一个基于GitHub Discussions的评论系统，可以方便地集成到博客中([参考tutorial](https://www.lixueduan.com/posts/blog/02-add-giscus-comment/)，[官方tutorial](https://giscus.app/zh-CN))。
 
 - 第一步，在GitHub仓库中点击设置
    ![GitHub设置](images/github-settings.png)
@@ -301,11 +302,11 @@ blog\MyBlog> git push origin master # 推送至远程仓库
 
 - 先在`github`设置中打开开发者设置: `settings -> Developer settings`
    ![开发者设置](images/developer-settings.png)
-- 新建一个`Personal access tokens`，这里选择`classic`就够了, 需要更细粒度的权限可以选择`fine-grained`，点击`Generate new token`继续：
+- 新建一个`Personal access tokens`，这里选择`classic`就够了,  需要更细粒度的权限可以选择`fine-grained`，点击`Generate new token`继续：
    ![生成token](images/generate-token.png)
-- 设置过期时间，选择`repo`权限，滑动到最下方生成Token后复制token值备用,**注意这个Token只可见一次，需要妥善保存**
+- 设置过期时间，选择`repo`权限，滑动到最下方生成Token后复制token值备用, **注意这个Token只可见一次，需要妥善保存**
    ![token权限](images/token-permissions.png)
-- 在**主仓库和子仓库**配置`Actions secrets`,`仓库设置 -> Secrets and variables -> Actions -> New repository secret`，
+- 在**主仓库和子仓库**配置`Actions secrets`, `仓库设置 -> Secrets and variables -> Actions -> New repository secret`，
    ![配置secret](images/config-secret.png)
 - 粘贴之前生成的Token值，点击添加保存：
    ![添加secret](images/add-secret.png)
@@ -350,7 +351,7 @@ blog\MyBlog> git push origin master # 推送至远程仓库
    # 触发条件：推送到 main 或 master 分支时
    on:
    push:
-      branches: [main, master]
+      branches: [main,  master]
    workflow_dispatch:  # 手动触发按键
    jobs:
    notify:
@@ -379,7 +380,7 @@ blog\MyBlog> git push origin master # 推送至远程仓库
 - 第三步，修改环境变量的值，例如把`HUGO_VERSION`修改为`0.157.0`，点击保存
 
 ### 3.5 锁定themes子仓库
-子仓库更新后可能对HUGO版本限制更高，导致Vercel部署失败, 可以在主仓库中锁定子仓库的版本，避免每次子仓库更新后都需要修改主仓库的子模块版本。
+子仓库更新后可能对HUGO版本限制更高，导致Vercel部署失败,  可以在主仓库中锁定子仓库的版本，避免每次子仓库更新后都需要修改主仓库的子模块版本。
 ```powershell
 # 进入子模块目录
 blog\HugoBlog> cd .\themes\hugo-theme-stack\
@@ -400,3 +401,4 @@ blog\HugoBlog> git add themes/hugo-theme-stack
 blog\HugoBlog> git commit -m "Lock hugo-theme-stack to v4.0.0-beta.8"
 blog\HugoBlog> git push
 ```
+

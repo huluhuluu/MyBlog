@@ -27,7 +27,15 @@ theme                  = "hugo-theme-stack"
     [[module.mounts]]
         source = "content"
         target = "content"
-        excludeFiles = ["post/mnn-tutorial/blog/**", "post/useful-tools/blog/**", "post/leetcode-logs/blog/**"]
+        excludeFiles = [
+            "post/mnn-tutorial/blog/**", 
+            "post/useful-tools/blog/**", 
+            "post/leetcode-logs/blog/**",
+            "post/brain-candy/blog/**",
+            "post/opencl-tutorial/blog/**",
+            "post/qnn-tutorial/blog/**",
+            "post/transformers-code-view/blog/**"
+        ]
     [[module.mounts]]
         source = "content/post/mnn-tutorial/blog"
         target = "content/post"
@@ -36,4 +44,16 @@ theme                  = "hugo-theme-stack"
         target = "content/post"
     [[module.mounts]]
         source = "content/post/leetcode-logs/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/brain-candy/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/opencl-tutorial/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/qnn-tutorial/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/transformers-code-view/blog"
         target = "content/post"
