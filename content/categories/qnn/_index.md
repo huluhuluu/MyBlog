@@ -1,5 +1,5 @@
 ---
 title: "QNN介绍"
 image: "qnn.png"
-url: "/p/qnn-tutorial/"
+redirect: "/p/qnn-tutorial/"
 ---

@@ -1,5 +1,5 @@
 ---
 title: "技术记录"
 image: "technical.png"
-url: "/p/hugo-blog-setup/"
+redirect: "/p/hugo-blog-setup/"
 ---

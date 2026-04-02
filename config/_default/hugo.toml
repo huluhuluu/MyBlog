@@ -22,7 +22,6 @@ theme                  = "hugo-theme-stack"
     priority   = 0.5
 
 # Mount submodule blog content as separate posts
-# Use excludeFiles to prevent duplicate processing
 [module]
     [[module.mounts]]
         source = "content"
@@ -34,7 +33,9 @@ theme                  = "hugo-theme-stack"
             "post/brain-candy/blog/**",
             "post/opencl-tutorial/blog/**",
             "post/qnn-tutorial/blog/**",
-            "post/transformers-code-view/blog/**"
+            "post/transformers-code-view/blog/**",
+            "post/speculative-decoding/blog/**",
+            "post/on-device-inference/blog/**"
         ]
     [[module.mounts]]
         source = "content/post/mnn-tutorial/blog"
@@ -56,4 +57,10 @@ theme                  = "hugo-theme-stack"
         target = "content/post"
     [[module.mounts]]
         source = "content/post/transformers-code-view/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/speculative-decoding/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/on-device-inference/blog"
         target = "content/post"
