@@ -27,6 +27,7 @@ theme                  = "hugo-theme-stack"
         source = "content"
         target = "content"
         excludeFiles = [
+            # 排除子模块 blog 内容（会在下方单独挂载）
             "post/mnn-tutorial/blog/**", 
             "post/useful-tools/blog/**", 
             "post/leetcode-logs/blog/**",
@@ -34,7 +35,9 @@ theme                  = "hugo-theme-stack"
             "post/opencl-tutorial/blog/**",
             "post/qnn-tutorial/blog/**",
             "post/transformers-code-view/blog/**",
-            "post/paper-view/blog/**"
+            "post/paper-view/blog/**",
+            # 排除所有 README.md 文件
+            "**/README.md"
         ]
     [[module.mounts]]
         source = "content/post/mnn-tutorial/blog"

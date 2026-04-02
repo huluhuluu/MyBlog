@@ -20,7 +20,7 @@ favicon            = "img/avatar.png"
     headingAnchor = false
     math          = false
     toc           = true
-    readingTime   = true
+    readingTime   = false
 
     [article.list]
         showTags = false
