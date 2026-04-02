@@ -34,8 +34,7 @@ theme                  = "hugo-theme-stack"
             "post/opencl-tutorial/blog/**",
             "post/qnn-tutorial/blog/**",
             "post/transformers-code-view/blog/**",
-            "post/speculative-decoding/blog/**",
-            "post/on-device-inference/blog/**"
+            "post/paper-view/blog/**"
         ]
     [[module.mounts]]
         source = "content/post/mnn-tutorial/blog"
@@ -59,8 +58,5 @@ theme                  = "hugo-theme-stack"
         source = "content/post/transformers-code-view/blog"
         target = "content/post"
     [[module.mounts]]
-        source = "content/post/speculative-decoding/blog"
-        target = "content/post"
-    [[module.mounts]]
-        source = "content/post/on-device-inference/blog"
+        source = "content/post/paper-view/blog"
         target = "content/post"
