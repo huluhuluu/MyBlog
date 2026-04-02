@@ -54,9 +54,7 @@ theme                  = "hugo-theme-stack"
     [[module.mounts]]
         source = "content/post/qnn-tutorial/blog"
         target = "content/post"
-    [[module.mounts]]
-        source = "content/post/transformers-code-view/blog"
-        target = "content/post"
+    # transformers-code-view/blog has only TODO files, skip mounting
     [[module.mounts]]
         source = "content/post/paper-view/blog"
         target = "content/post"
