@@ -25,3 +25,6 @@
 [submodule "content/post/brain-candy"]
 	path = content/post/brain-candy
 	url = https://github.com/huluhuluu/brain-candy.git
+[submodule "content/post/arm-simd-tutorial"]
+	path = content/post/arm-simd-tutorial
+	url = https://github.com/huluhuluu/simd-tutorial.git
