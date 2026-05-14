@@ -1,4 +1,7 @@
-﻿name: Update Submodules
+name: Update Submodules
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   repository_dispatch:
@@ -9,7 +12,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
           fetch-depth: 0
@@ -20,8 +23,14 @@ jobs:
 
       - name: Commit and push
         run: |
+          BRANCH="$(git branch --show-current)"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update submodules"
-          git push https://x-access-token:${{ secrets.PAT }}@github.com/huluhuluu/MyBlog.git HEAD:master
+          if git diff --cached --quiet; then
+            echo "No submodule updates to commit"
+            exit 0
+          fi
+          git commit -m "chore: update submodules"
+          git pull --rebase origin "$BRANCH"
+          git push origin "HEAD:$BRANCH"
