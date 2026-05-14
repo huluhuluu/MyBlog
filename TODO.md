@@ -1,6 +1,6 @@
 # Draft Content TODO
 
-> 更新时间：`2026-05-13`
+> 更新时间：`2026-05-14`
 >
 > 统计范围：`content/post/*` 子仓库中所有带 `draft: true` 的 Markdown 内容，已排除主题模板。
 
@@ -15,28 +15,29 @@
 | 子仓库 | 草稿数 | 说明 |
 | --- | ---: | --- |
 | `paper-view` | 13 | 论文解读与综述，当前草稿最多 |
-| `arm-simd-tutorial` | 5 | 系列首页 1 篇，子文章 4 篇 |
+| `simd-tutorial` | 5 | 系列首页 1 篇，子文章 4 篇 |
 | `mnn-tutorial` | 5 | README 总览 1 篇，子文章 4 篇 |
 | `opencl-tutorial` | 2 | OpenCL / MNN OpenCL 两篇 |
-| `useful-tools` | 2 | 工具备忘与终端工具两篇 |
+| `transformers-code-view` | 5 | 系列首页 1 篇，子文章 4 篇 |
+| `useful-tools` | 1 | 仅剩 Ubuntu 代理配置草稿 |
 | `leetcode-logs` | 1 | README 总览草稿 |
-| **合计** | **28** | **6 个子仓库存在草稿** |
+| **合计** | **32** | **7 个子仓库存在草稿** |
 
-当前无 `draft: true` 内容的子仓库：`brain-candy`、`qnn-tutorial`、`transformers-code-view`
+当前无 `draft: true` 内容的子仓库：`brain-candy`、`qnn-tutorial`
 
 ## 分仓库清单
 
-### `arm-simd-tutorial` · 5
+### `simd-tutorial` · 5
 
-路径：`content/post/arm-simd-tutorial`
+路径：`content/post/simd-tutorial`
 
 | 状态 | 类型 | 标题 | 最后更新 | Slug |
 | --- | --- | --- | --- | --- |
-| [ ] | index | [ARM SIMD 教程](./content/post/arm-simd-tutorial/index.md) | `2026-04-15` | `arm-simd-tutorial` |
-| [ ] | article | [ARM SIMD / NEON 基础](./content/post/arm-simd-tutorial/blog/arm-simd-intro/index.md) | `2026-04-15` | `arm-simd-intro` |
-| [ ] | article | [NEON 内在函数与数据搬运](./content/post/arm-simd-tutorial/blog/neon-intrinsics/index.md) | `2026-04-15` | `neon-intrinsics` |
-| [ ] | article | [NEON GEMM 微内核思路](./content/post/arm-simd-tutorial/blog/neon-gemm/index.md) | `2026-04-15` | `neon-gemm` |
-| [ ] | article | [Android 端基准与调优](./content/post/arm-simd-tutorial/blog/arm-simd-benchmark/index.md) | `2026-04-15` | `arm-simd-benchmark` |
+| [ ] | index | [ARM SIMD 教程](./content/post/simd-tutorial/index.md) | `2026-04-15` | `arm-simd-tutorial` |
+| [ ] | article | [ARM SIMD / NEON 基础](./content/post/simd-tutorial/blog/arm-simd-intro/index.md) | `2026-04-15` | `arm-simd-intro` |
+| [ ] | article | [NEON 内在函数与数据搬运](./content/post/simd-tutorial/blog/neon-intrinsics/index.md) | `2026-04-15` | `neon-intrinsics` |
+| [ ] | article | [NEON GEMM 微内核思路](./content/post/simd-tutorial/blog/neon-gemm/index.md) | `2026-04-15` | `neon-gemm` |
+| [ ] | article | [Android 端基准与调优](./content/post/simd-tutorial/blog/arm-simd-benchmark/index.md) | `2026-04-15` | `arm-simd-benchmark` |
 
 ### `leetcode-logs` · 1
 
@@ -87,11 +88,22 @@
 | [ ] | article | [LLM Test-Time Compute Scaling 深度解析](./content/post/paper-view/blog/test-time-scaling/index.md) | `2026-04-15` | `test-time-scaling` |
 | [ ] | article | [LLM 推理系统优化深度解析](./content/post/paper-view/blog/llm-inference-optimization/index.md) | `2026-04-15` | `llm-inference-optimization` |
 
-### `useful-tools` · 2
+### `transformers-code-view` · 5
+
+路径：`content/post/transformers-code-view`
+
+| 状态 | 类型 | 标题 | 最后更新 | Slug |
+| --- | --- | --- | --- | --- |
+| [ ] | index | [Transformers 源码解析](./content/post/transformers-code-view/index.md) | `2026-05-14` | `transformers-code-view` |
+| [ ] | article | [Qwen3 代码阅读: Module Construction](./content/post/transformers-code-view/blog/module-construction/index.md) | `2026-04-03` | `transformers-module-construction` |
+| [ ] | article | [Qwen3 代码阅读: Attention 机制](./content/post/transformers-code-view/blog/attention-mechanisms/index.md) | `2026-04-03` | `transformers-attention` |
+| [ ] | article | [Qwen3 代码阅读: KV Cache](./content/post/transformers-code-view/blog/kv-cache/index.md) | `2026-04-03` | `transformers-kv-cache` |
+| [ ] | article | [Qwen3 代码阅读: Fine Tune and Loss](./content/post/transformers-code-view/blog/finetune-and-loss/index.md) | `2026-04-03` | `transformers-finetune-loss` |
+
+### `useful-tools` · 1
 
 路径：`content/post/useful-tools`
 
 | 状态 | 类型 | 标题 | 最后更新 | Slug |
 | --- | --- | --- | --- | --- |
-| [ ] | article | [华为开发板常用命令备忘](./content/post/useful-tools/blog/huawei-board-commands/index.md) | `2026-03-29` | `huawei-board-commands` |
-| [ ] | article | [reptyr 使用指南](./content/post/useful-tools/blog/reptyr/index.md) | `2026-03-04` | `reptyr-guide` |
+| [ ] | article | [Ubuntu 代理配置](./content/post/useful-tools/blog/ubuntu-proxy/index.md) | `2026-01-30` | `ubuntu-proxy` |
