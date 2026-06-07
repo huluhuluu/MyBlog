@@ -1,16 +1,20 @@
-{{ $image := partial "helper/image" (dict "Image" .context.Params.image "Resources" .context.Resources) }}
+{{ $page := . }}
+{{ if reflect.IsMap . }}
+    {{ $page = .context }}
+{{ end }}
+{{ $image := partial "helper/image" (dict "Image" $page.Params.image "Resources" $page.Resources "Context" $page) }}
 <article class="{{ if $image }}has-image{{ end }}">
-    <a href="{{ .context.Params.redirect | default .context.RelPermalink }}">
+    <a href="{{ $page.Params.redirect | default $page.RelPermalink }}">
         {{ if $image }}
         <div class="article-image">
             {{ partial "helper/thumbnail-image" (dict 
                 "Resource" $image.Resource
                 "Width" 250
                 "Height" 150
-                "Resize" .context.Site.Params.ImageProcessing.Thumbnail.Enabled
+                "Resize" $page.Site.Params.ImageProcessing.Thumbnail.Enabled
                 "Attributes" (dict
                     "src" $image.Permalink
-                    "alt" (printf "Featured image of post %s" .context.Title)
+                    "alt" (printf "Featured image of post %s" $page.Title)
                     "loading" "lazy"
                     "width" $image.Width
                     "height" $image.Height
@@ -30,7 +34,7 @@
             {{- end -}}
         >
             <h2 class="article-title">
-                {{- .context.Title -}}
+                {{- $page.Title -}}
             </h2>
         </div>
     </a>
