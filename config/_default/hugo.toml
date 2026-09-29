@@ -36,6 +36,7 @@ theme                  = "hugo-theme-stack"
             "post/qnn-tutorial/blog/**",
             "post/transformers-code-view/blog/**",
             "post/paper-view/blog/**",
+            "post/language-file-cheatsheets/blog/**",
             # 排除所有 README.md 文件
             "**/README.md"
         ]
@@ -62,4 +63,7 @@ theme                  = "hugo-theme-stack"
         target = "content/post"
     [[module.mounts]]
         source = "content/post/paper-view/blog"
+        target = "content/post"
+    [[module.mounts]]
+        source = "content/post/language-file-cheatsheets/blog"
         target = "content/post"

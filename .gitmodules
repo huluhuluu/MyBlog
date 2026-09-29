@@ -28,3 +28,6 @@
 [submodule "content/post/simd-tutorial"]
 	path = content/post/simd-tutorial
 	url = https://github.com/huluhuluu/simd-tutorial.git
+[submodule "content/post/language-file-cheatsheets"]
+	path = content/post/language-file-cheatsheets
+	url = https://github.com/huluhuluu/language-file-cheatsheets.git
