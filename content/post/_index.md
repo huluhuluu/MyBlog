@@ -17,7 +17,7 @@ hide_list: true
 - [推测解码系列论文深度解析](/p/speculative-decoding-overview/) - MEDUSA、EAGLE 系列、DFlash 等论文解析
 
 ### 端侧推理优化 (On-device Inference)
-- [Fast On-device LLM Inference with NPUs](/p/asplos25-npu-llm/) - NPU 指令级融合，20+ tokens/s
+- [Fast On-device LLM Inference with NPUs](paper-view/blog/on-device-inference/asplos25-npu-llm/index.md) - NPU 指令级融合，20+ tokens/s
 - [shadowAttn: Dynamic Sparse Attention](/p/dynamic-sparse-attention/) - NPU-centric 稀疏注意力
 - [Agent.xpu](/p/agent-xpu-scheduling/) - Agentic LLM 流调度
 - [HeteroLLM](/p/heterollm-soc/) - 层级/张量级异构执行
@@ -43,26 +43,29 @@ hide_list: true
 ## 🛠 实用工具
 
 ### 工具推荐合集
-- [实用工具推荐](/p/useful-tools/) - VSCode、AI Agent、终端工具配置等
+- [实用工具推荐](useful-tools/index.md) - VSCode、AI Agent、终端工具配置等
 
 ### AI 编程助手
-- [Claude Code 使用指南](/p/claude-code/) - Anthropic 官方编程助手
-- [GitHub Copilot 配置](/p/copilot-config/) - 代码补全配置
-- [Codex CLI 配置](/p/codex-cli-config/) - OpenAI 命令行工具
-- [iFlow CLI 使用](/p/iflow-cli/) - 心流 CLI 工具
+- [Claude Code 使用指南](useful-tools/blog/claude-code/index.md) - Anthropic 官方编程助手
+- [GitHub Copilot 配置](useful-tools/blog/copilot/index.md) - 代码补全配置
+- [Codex CLI 配置](useful-tools/blog/codex-cli-config/index.md) - OpenAI 命令行工具
+- [iFlow CLI 使用](useful-tools/blog/iflow/index.md) - 心流 CLI 工具
 
 ---
 
 ## 💻 编程学习
 
 ### LeetCode 刷题
-- [LeetCode 刷题记录](/p/leetcode-logs/) - 每日一题、Hot100、总结
-- [LeetCode 每日一题](/p/leetcode-daily/) - 按日期整理
-- [LeetCode Hot100](/p/leetcode-hot100/) - 热门题目解析
-- [LeetCode 总结](/p/leetcode-summary/) - 算法模板和技巧
+- [LeetCode 刷题记录](leetcode-logs/index.md) - 每日一题、Hot100、总结
+- [LeetCode 每日一题](leetcode-logs/blog/daily/index.md) - 按日期整理
+- [LeetCode Hot100](leetcode-logs/blog/hot100/index.md) - 热门题目解析
+- [LeetCode 总结](leetcode-logs/blog/summary/index.md) - 算法模板和技巧
 
 ### Transformers 源码解析
 - [Transformers 源码阅读](/p/transformers-code-view/) - HuggingFace Transformers 深度解析
+
+### 语言与文件格式
+- [语言与文件格式备忘](language-file-cheatsheets/blog/_index.md) - 8 种语言核心语法 + 5 种文件格式速查
 
 ---
 
@@ -72,89 +75,89 @@ hide_list: true
 - [MNN 端侧部署教程](/p/mnn-tutorial/) - 从环境配置到 LLM 部署
 
 ### QNN 教程
-- [QNN 入门介绍](/p/qnn-intro/) - Qualcomm AI 引擎概述
+- [QNN 入门介绍](qnn-tutorial/blog/qnn-intro/index.md) - Qualcomm AI 引擎概述
 - [QNN 环境搭建](/p/qnn-setup/) - 开发环境配置
 - [QNN 量化指南](/p/qnn-quantization/) - 模型量化实践
-- [QNN 教程合集](/p/qnn-tutorial/) - 完整教程系列
+- [QNN 教程合集](qnn-tutorial/index.md) - 完整教程系列
 
 ### OpenCL 教程
-- [OpenCL 入门](/p/opencl-intro/) - 并行计算基础
+- [OpenCL 入门](opencl-tutorial/blog/opencl-intro/index.md) - 并行计算基础
 - [OpenCL 环境搭建](/p/opencl-setup/) - 开发环境配置
-- [Hello OpenCL](/p/hello-opencl/) - 第一个程序
-- [OpenCL 教程合集](/p/opencl-tutorial/) - 完整教程系列
+- [Hello OpenCL](opencl-tutorial/blog/hello-opencl/index.md) - 第一个程序
+- [OpenCL 教程合集](opencl-tutorial/index.md) - 完整教程系列
 
 ---
 
 ## 🔧 系统配置
 
 ### Linux 环境
-- [Ubuntu 配置指南](/p/ubuntu-config/) - 系统初始化
-- [Git 常用命令](/p/git-commands/) - 版本控制
-- [Linux 常用命令](/p/linux-commands/) - 命令速查
-- [Docker 常用命令](/p/docker-commands/) - 容器操作
+- [Ubuntu 配置指南](useful-tools/blog/ubuntu-config/index.md) - 系统初始化
+- [Git 常用命令](useful-tools/blog/git-commands/index.md) - 版本控制
+- [Linux 常用命令](useful-tools/blog/linux-commands/index.md) - 命令速查
+- [Docker 常用命令](useful-tools/blog/docker-commands/index.md) - 容器操作
 
 ### 终端工具
-- [Zsh 配置](/p/zsh-config/) - Shell 美化
-- [Tmux 使用指南](/p/tmux-guide/) - 终端复用
-- [fzf 模糊搜索](/p/fzf/) - 快速查找
-- [Zoxide 目录跳转](/p/zoxide/) - 智能 cd
-- [PWSH7 迁移](/p/pwsh7-migration/) - PowerShell 7
+- [Zsh 配置](useful-tools/blog/zsh/index.md) - Shell 美化
+- [Tmux 使用指南](useful-tools/blog/tmux/index.md) - 终端复用
+- [fzf 模糊搜索](useful-tools/blog/fzf/index.md) - 快速查找
+- [Zoxide 目录跳转](useful-tools/blog/zoxide/index.md) - 智能 cd
+- [PWSH7 迁移](useful-tools/blog/pwsh7-migration/index.md) - PowerShell 7
 
 ### Vim/编辑器
-- [Vim 常用命令](/p/vim-commands/) - 编辑器操作
-- [Flash VSCode](/p/flash-vscode/) - 快速上手
+- [Vim 常用命令](useful-tools/blog/vim-commands/index.md) - 编辑器操作
+- [Flash VSCode](useful-tools/blog/flash-vscode/index.md) - 快速上手
 
 ---
 
 ## 🌐 网络与调试
 
 ### 网络工具
-- [SSH 使用指南](/p/ssh-guide/) - 远程连接
-- [Netcat 网络工具](/p/netcat/) - 网络调试
-- [Wireshark 使用](/p/wireshark-guide/) - 抓包分析
+- [SSH 使用指南](useful-tools/blog/ssh-guide/index.md) - 远程连接
+- [Netcat 网络工具](useful-tools/blog/netcat/index.md) - 网络调试
+- [Wireshark 使用](useful-tools/blog/wireshark-guide/index.md) - 抓包分析
 
 ### Android 开发
-- [ADB 使用指南](/p/adb-guide/) - Android 调试桥
-- [Remote ADB](/p/remote-adb/) - 远程调试
-- [Termux 配置](/p/termux-config/) - 手机终端
+- [ADB 使用指南](useful-tools/blog/adb-guide/index.md) - Android 调试桥
+- [Remote ADB](mnn-tutorial/blog/remote-adb/index.md) - 远程调试
+- [Termux 配置](useful-tools/blog/termux-config/index.md) - 手机终端
 
 ### Jetson 开发
-- [Jetson 配置指南](/p/jetson-config/) - NVIDIA 开发板
+- [Jetson 配置指南](useful-tools/blog/jetson-config/index.md) - NVIDIA 开发板
 
 ---
 
 ## 📦 开发环境
 
 ### Python 环境
-- [Python 环境管理](/p/python-env/) - conda/venv
+- [Python 环境管理](useful-tools/blog/python-env/index.md) - conda/venv
 
 ### 包管理器
-- [包管理器概览](/p/package-managers/) - pip/apt/brew 等
+- [包管理器概览](useful-tools/blog/package-managers/index.md) - pip/apt/brew 等
 
 ### 交叉编译
-- [交叉编译指南](/p/cross-compiler/) - 跨平台编译
+- [交叉编译指南](mnn-tutorial/blog/cross-compiler/index.md) - 跨平台编译
 
 ---
 
 ## 🧠 思维训练
 
 ### 趣味数学
-- [蓝眼岛民悖论](/p/blue-eyed-islander-paradox/) - 逻辑推理
-- [疯狂乘客问题](/p/airplane-seat-probability/) - 概率问题
-- [Zermelo 博弈论](/p/zermelo-game-theory/) - 博弈论基础
+- [蓝眼岛民悖论](brain-candy/blog/blue-eyed-islander-paradox/index.md) - 逻辑推理
+- [疯狂乘客问题](brain-candy/blog/airplane-seat-probability/index.md) - 概率问题
+- [Zermelo 博弈论](brain-candy/blog/zermelo-game-theory/index.md) - 博弈论基础
 
 ### 思维糖果
-- [Brain Candy](/p/brain-candy/) - 趣味博客、逻辑、辩论等思维糖果
+- [Brain Candy](brain-candy/index.md) - 趣味博客、逻辑、辩论等思维糖果
 
 ---
 
 ## 📝 其他
 
 ### 博客搭建
-- [个人博客搭建记录](/p/hugo-blog-setup/) - Hugo + GitHub Pages
+- [个人博客搭建记录](hugo-blog-setup/index.md) - Hugo + GitHub Pages
 
 ### 模型下载
-- [模型下载工具](/p/model-downloader/) - HuggingFace 模型加速
+- [模型下载工具](useful-tools/blog/model-downloader/index.md) - HuggingFace 模型加速
 
 ---
 

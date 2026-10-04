@@ -1,0 +1,70 @@
+{{- /* 站点级链接渲染钩子：正文写「仓库相对路径」，GitHub/编辑器可直接点开，构建时解析成永久链接。
+
+     子模块的 blog/ 被扁平挂载到 content/post/，language 子模块挂到 content/language，
+     所以物理相对路径与 Hugo 逻辑路径不一致。这里把目标归一成「挂载根之后的片段」(R)，
+     再按候选依次解析：
+       R 来源：含 /blog/ 则取其后；以 blog/ 开头则去掉；否则原路径，最后兜底去掉前导 ../
+       候选：原路径 / R / /post/R / /language/R（各自再试 index.md、_index.md、去尾 /）
+
+     支持 .md / 目录 / #fragment；外链与纯锚点原样保留。 */ -}}
+
+{{- $dest     := .Destination -}}
+{{- $href     := $dest -}}
+{{- $external := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "mailto:") (hasPrefix $dest "//") -}}
+{{- $anchor   := hasPrefix $dest "#" -}}
+
+{{- if and (not $external) (not $anchor) -}}
+  {{- $path := $dest -}}
+  {{- $frag := "" -}}
+  {{- if strings.Contains $path "#" -}}
+    {{- $parts := split $path "#" -}}
+    {{- $path = index $parts 0 -}}
+    {{- $frag = printf "#%s" (index $parts 1) -}}
+  {{- end -}}
+
+  {{- /* 计算挂载根之后片段 R */ -}}
+  {{- $r := $path -}}
+  {{- if strings.Contains $path "/blog/" -}}
+    {{- $r = replaceRE `^.*?/blog/` "" $path -}}
+  {{- else if hasPrefix $path "blog/" -}}
+    {{- $r = strings.TrimPrefix "blog/" $path -}}
+  {{- else if hasPrefix $path "../" -}}
+    {{- $r = replaceRE `^(?:\.\./)+` "" $path -}}
+  {{- end -}}
+
+  {{- $cands := slice $path (strings.TrimSuffix "/" $path) -}}
+  {{- if ne $r $path -}}
+    {{- $cands = $cands | append $r -}}
+    {{- $cands = $cands | append (strings.TrimSuffix "/" $r) -}}
+  {{- end -}}
+  {{- if and $r (not (hasPrefix $r "/")) -}}
+    {{- $cands = $cands | append (printf "/post/%s" $r) -}}
+    {{- $cands = $cands | append (printf "/post/%s" (strings.TrimSuffix "/" $r)) -}}
+    {{- $cands = $cands | append (printf "/language/%s" $r) -}}
+    {{- $cands = $cands | append (printf "/language/%s" (strings.TrimSuffix "/" $r)) -}}
+  {{- end -}}
+  {{- $cands = $cands | append (strings.TrimPrefix "./" $path) -}}
+
+  {{- $target := false -}}
+  {{- $page := .Page -}}
+  {{- $site := $page.Site -}}
+  {{- range $c := $cands -}}
+    {{- if and (not $target) $c -}}
+      {{- $c2 := strings.TrimSuffix "/" $c -}}
+      {{- $t := $page.GetPage $c -}}
+      {{- if not $t -}}{{- $t = $page.GetPage $c2 -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $page.GetPage (printf "%s/index.md" $c2) -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $page.GetPage (printf "%s/_index.md" $c2) -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $site.GetPage $c2 -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $site.GetPage (printf "%s/index.md" $c2) -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $site.GetPage (printf "%s/_index.md" $c2) -}}{{- end -}}
+      {{- with $t -}}{{- $target = . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $target -}}
+    {{- $href = printf "%s%s" .RelPermalink $frag -}}
+  {{- end -}}
+{{- end -}}
+
+<a class="link" href="{{ $href | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>

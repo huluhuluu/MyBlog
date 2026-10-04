@@ -15,6 +15,9 @@ theme                  = "hugo-theme-stack"
 [permalinks]
     post = "/p/:slug/"
     page = "/:slug/"
+    # 语言备忘子模块挂到独立的 language 顶层 section，用路径式 URL：
+    # content/language/cpp/core-syntax/ -> /p/language/cpp/core-syntax/
+    language = "/p/language/:sections[1:]/:contentbasename/"
 
 [sitemap]
     changefreq = "weekly"
@@ -66,4 +69,4 @@ theme                  = "hugo-theme-stack"
         target = "content/post"
     [[module.mounts]]
         source = "content/post/language-file-cheatsheets/blog"
-        target = "content/post"
+        target = "content/language"
