@@ -1,4 +1,11 @@
-{{- /* 站点级链接渲染钩子：正文写「仓库相对路径」，GitHub/编辑器可直接点开，构建时解析成永久链接。
+{{- /* 站点级链接渲染钩子：正文写「仓库相对路径」或「子仓库 GitHub blob URL」，
+     GitHub/编辑器可直接点开，构建时解析成站内永久链接。
+
+     背景：content/post/ 下 10 个目录是独立 GitHub 仓库（gitlink）。父仓库树里
+     不存在它们的文件路径，所以父仓库内的「相对路径」在 GitHub 上必然 404。
+     因此跨仓库引用统一写成子仓库的 blob URL：
+       https://github.com/huluhuluu/useful-tools/blob/main/blog/tmux/index.md
+     本钩子把它改写成站内永久链接 /p/tmux/；若改写失败则保留原 URL（新窗口打开）。
 
      子模块的 blog/ 被扁平挂载到 content/post/，language 子模块挂到 content/language，
      所以物理相对路径与 Hugo 逻辑路径不一致。这里把目标归一成「挂载根之后的片段」(R)，
@@ -12,6 +19,48 @@
 {{- $href     := $dest -}}
 {{- $external := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "mailto:") (hasPrefix $dest "//") -}}
 {{- $anchor   := hasPrefix $dest "#" -}}
+
+{{- /* 子仓库 → 挂载信息。新增子模块时需同步维护：
+       dir   = content/post/<dir> 目录名（用于仓库根下的 index.md）
+       mount = blog/ 扁平挂载后的逻辑根（/post 或 /language）
+       须与 .gitmodules 及 hugo.toml 的 module.mounts 保持一致。 */ -}}
+{{- $ghMap := dict
+      "useful-tools"              (dict "dir" "useful-tools"              "mount" "/post")
+      "MNN-TUTORIAL"              (dict "dir" "mnn-tutorial"              "mount" "/post")
+      "Leetcode-Logs"             (dict "dir" "leetcode-logs"             "mount" "/post")
+      "brain-candy"               (dict "dir" "brain-candy"               "mount" "/post")
+      "opencl-tutorial"           (dict "dir" "opencl-tutorial"           "mount" "/post")
+      "qnn-tutorial"              (dict "dir" "qnn-tutorial"              "mount" "/post")
+      "transformers-code-view"    (dict "dir" "transformers-code-view"    "mount" "/post")
+      "paper-view"                (dict "dir" "paper-view"                "mount" "/post")
+      "language-file-cheatsheets" (dict "dir" "language-file-cheatsheets" "mount" "/language")
+-}}
+
+{{- /* 识别本站子仓库的 GitHub blob URL */ -}}
+{{- $isGh   := false -}}
+{{- $ghRepo := "" -}}
+{{- $ghPath := "" -}}
+{{- $ghFrag := "" -}}
+{{- if hasPrefix $dest "https://github.com/huluhuluu/" -}}
+  {{- $m := findRESubmatch `^https://github\.com/huluhuluu/([^/]+)/blob/[^/]+/([^#?]+)(.*)$` $dest -}}
+  {{- with $m -}}
+    {{- $hit    := index . 0 -}}
+    {{- $repo   := index $hit 1 -}}
+    {{- $p      := index $hit 2 -}}
+    {{- $frag   := index $hit 3 -}}
+    {{- range $k, $v := $ghMap -}}
+      {{- if and (not $isGh) (eq (lower $k) (lower $repo)) -}}
+        {{- $isGh   = true -}}
+        {{- $ghRepo = $k -}}
+        {{- $ghPath = $p -}}
+        {{- /* 行号锚点（#L12）在站点上没有意义，丢弃 */ -}}
+        {{- if not (findRE `^#L\d+` $frag) -}}
+          {{- $ghFrag = $frag -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 
 {{- if and (not $external) (not $anchor) -}}
   {{- $path := $dest -}}
@@ -64,6 +113,37 @@
 
   {{- with $target -}}
     {{- $href = printf "%s%s" .RelPermalink $frag -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* 子仓库 blob URL：按映射解析成站内链接 */ -}}
+{{- if $isGh -}}
+  {{- $info := index $ghMap $ghRepo -}}
+  {{- $ghCands := slice -}}
+  {{- if hasPrefix $ghPath "blog/" -}}
+    {{- $ghCands = $ghCands | append (printf "%s/%s" (index $info "mount") (strings.TrimPrefix "blog/" $ghPath)) -}}
+  {{- else -}}
+    {{- $ghCands = $ghCands | append (printf "/post/%s/%s" (index $info "dir") $ghPath) -}}
+  {{- end -}}
+  {{- $ghTarget := false -}}
+  {{- $ghPage := .Page -}}
+  {{- $ghSite := $ghPage.Site -}}
+  {{- range $c := $ghCands -}}
+    {{- if and (not $ghTarget) $c -}}
+      {{- $c2 := strings.TrimSuffix "/" $c -}}
+      {{- $t := $ghPage.GetPage $c -}}
+      {{- if not $t -}}{{- $t = $ghPage.GetPage $c2 -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $ghPage.GetPage (printf "%s/index.md" $c2) -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $ghPage.GetPage (printf "%s/_index.md" $c2) -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $ghSite.GetPage $c2 -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $ghSite.GetPage (printf "%s/index.md" $c2) -}}{{- end -}}
+      {{- if not $t -}}{{- $t = $ghSite.GetPage (printf "%s/_index.md" $c2) -}}{{- end -}}
+      {{- with $t -}}{{- $ghTarget = . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $ghTarget -}}
+    {{- $href = printf "%s%s" .RelPermalink $ghFrag -}}
+    {{- $external = false -}}
   {{- end -}}
 {{- end -}}
 
